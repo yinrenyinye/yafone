@@ -14,10 +14,6 @@ class IndexController extends Yaf_Controller_Abstract {
      */
 	public function indexAction($name = "Stranger") {
 
-	    $pagination = new Common_Pagination();
-
-	    var_dump($pagination);
-
         var_dump($name);
 		//1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
