@@ -6,7 +6,7 @@
  * Time: 18:00
  */
 
-class Pagination
+class Common_Pagination
 {
     /** @var string the pagination base url */
     protected $_base_url;

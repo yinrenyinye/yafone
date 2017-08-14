@@ -1,6 +1,6 @@
 <?php
 
-class AliasLoader
+class Common_AliasLoader
 {
     /**
      * The array of class aliases.

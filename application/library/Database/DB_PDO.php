@@ -8,5 +8,18 @@
  */
 class DB_PDO implements Database_Database
 {
+    public function connect($host, $db, $user, $pwd, $options = [])
+    {
+        // TODO: Implement connect() method.
+    }
 
+    public function query($sql)
+    {
+        // TODO: Implement query() method.
+    }
+
+    public function close()
+    {
+        // TODO: Implement close() method.
+    }
 }

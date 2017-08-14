@@ -6,7 +6,7 @@
  * Date: 2017/8/14
  * Time: 14:36
  */
-interface Database
+interface Database_Database
 {
     public function connect($host,$db,$user,$pwd,$options = []);
 
