@@ -1,5 +1,4 @@
 <?php
-namespace Common;
 
 class AliasLoader
 {

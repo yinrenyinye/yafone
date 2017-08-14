@@ -6,9 +6,6 @@
  * Time: 18:00
  */
 
-namespace Common;
-
-
 class Pagination
 {
     /** @var string the pagination base url */
