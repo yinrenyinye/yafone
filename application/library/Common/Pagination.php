@@ -21,13 +21,16 @@ class Pagination
     protected $_cur_page;
 
     /** @var int the pagination data numbers*/
-    protected $_pagesize;
+    protected $_pagesize = 5;
 
     /** @var array the pagination request filter  */
     protected $_query_str;
 
     /** @var int the pagination show link numbers */
-    protected $_show_link_nums;
+    protected $_show_link_nums = 5;
+
+    /** @var string the pagination page link */
+    protected $_page_link = '';
 
     public function __construct()
     {
@@ -38,29 +41,88 @@ class Pagination
     {
         if(func_num_args() > 1){
             $arguments = func_get_args();
-
             for($i = 0;$i < func_num_args();$i++){
                 $set_action = 'set_'.key($arguments[$i]);
                 $this->$set_action(current($arguments[$i]));
             }
-
         }else{
             if(is_array(func_get_arg(0))){
-
                 foreach(func_get_arg(0) as $k => $item){
                     $set_action = 'set_'.$k;
                     $this->$set_action($item);
                 }
-
-            }else{
-                return false;
             }
         }
     }
 
     public function create_links()
     {
+        if(isset($this->_pagesize) && !empty($this->_pagesize)){
+            $query_all = array_merge($this->_query_str,['pagesize'=>$this->_pagesize],['page'=> '']);
+        }else{
+            $query_all = array_merge($this->_query_str,['page'=> '']);
+        }
 
+        $query_link = '?'.http_build_query($query_all);
+
+        if(1 < $this->_cur_page){
+            $this->_page_link .= '<a href="'.$this->_base_url.$query_link.'1">首页</a>&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.($this->_cur_page - 1).'">上一页</a>';
+        }
+
+        if($this->_pagetotal <= $this->_show_link_nums){
+
+            for($i = 1;$i <= $this->_pagetotal;$i++){
+                if($i == $this->_cur_page){
+                    $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
+                }else{
+                    $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                }
+            }
+
+        }else{
+
+            $step = floor($this->_show_link_nums / 2);
+
+            if($this->_cur_page <= $this->_show_link_nums - $step){
+
+                for($i = 1;$i <= $this->_show_link_nums;$i++){
+                    if($i == $this->_cur_page){
+                        $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
+                    }else{
+                        $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                    }
+                }
+
+            }else{
+
+                if($this->_cur_page + $step > $this->_pagetotal){
+
+                    for($i = $this->_pagetotal - $this->_show_link_nums ;$i <= $this->_pagetotal;$i++){
+                        if($i == $this->_cur_page){
+                            $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
+                        }else{
+                            $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                        }
+                    }
+
+                }else{
+                    for($i = $this->_cur_page - $step ;$i <= $this->_cur_page + $step;$i++){
+                        if($i == $this->_cur_page){
+                            $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
+                        }else{
+                            $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                        }
+                    }
+                }
+
+            }
+        }
+
+        if($this->_cur_page < $this->_pagetotal){
+            $this->_page_link .= '<a href="'.$this->_base_url.$query_link.($this->_cur_page + 1).'">下一页</a>&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$this->_pagetotal.'">尾页</a>';
+        }
+
+        return $this->_page_link;
     }
 
     public function set_base_url($base_url)
