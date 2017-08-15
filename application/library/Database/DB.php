@@ -20,15 +20,15 @@ class Database_DB
 
     }
 
-    public static function getInstance()
+    public static function getInstance($is_write = 1,array $db_conf = [])
     {
         if(!(self::$_instance instanceof self)){
             self::$_instance = new self();
         }
-        return self::$_instance->connect();
+        return self::$_instance->connect($is_write,$db_conf);
     }
 
-    public static function connect($is_write = 1,array $db_conf = [])
+    public static function connect($is_write,$db_conf)
     {
         if(empty($db_conf)){
             $db_conf = Yaf_Registry::get("default_db_config");
