@@ -104,7 +104,7 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement count() method.
         if(empty($sql)){
-            return $this->query("SELECT count(*) AS `total` FROM {$this->table}")->getOne();
+            return $this->query("SELECT count(*) AS `total` FROM `{$this->table}`")->getOne();
         }else{
             return $this->query($sql)->getOne();
         }
