@@ -17,5 +17,7 @@ class BaseModel
         $this->db = Database_DB::getInstance();
 
         $this->db->table = static::$table;
+
+        $this->db->table = static::$columns;
     }
 }
