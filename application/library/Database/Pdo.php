@@ -66,8 +66,9 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
+        $this->statement->setFetchMode(\PDO::FETCH_ASSOC);
         $this->statement->execute();
-        $result = $this->statement->fetch();
+        $result = $this->statement->fetchAll();
         return $result;
     }
 
