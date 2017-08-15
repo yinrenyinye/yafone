@@ -29,7 +29,7 @@ class Database_DB
             $this->_set_driver($db_conf['dirver']);
         }
 
-        var_dump($this->_driver);
+        var_dump($this->_driver,1111);
 
         $db = new $this->_driver();
 
