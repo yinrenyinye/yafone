@@ -12,11 +12,16 @@ class CommentModel extends BaseModel
 
     public function count()
     {
-        return $this->db->count();
+        return $this->_db->count();
     }
 
-    public function get_list()
+    public function get_list($pagesize,$offset)
     {
-        return true;
+        return $this->_db->query("SELECT * FROM `".$this->table_name()."` LIMIT {$offset},{$pagesize}")->getAll();
+    }
+
+    public function table_name()
+    {
+        return self::$table;
     }
 }

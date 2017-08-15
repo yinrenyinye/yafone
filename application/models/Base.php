@@ -7,6 +7,8 @@
  */
 class BaseModel
 {
+    protected $_db;
+
     public static $table;
 
     public static $columns = [];
@@ -14,10 +16,10 @@ class BaseModel
     public function __construct()
     {
 
-        $this->db = Database_DB::getInstance();
+        $this->_db = Database_DB::getInstance();
 
-        $this->db->table = static::$table;
+        $this->_db->table = static::$table;
 
-        $this->db->columns = static::$columns;
+        $this->_db->columns = static::$columns;
     }
 }

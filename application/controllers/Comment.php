@@ -14,18 +14,34 @@ class CommentController extends Yaf_Controller_Abstract {
      */
 	public function indexAction($name = "Stranger") {
 
+        if (!empty($this->getRequest()->getQuery("page"))) {
+            $page = intval($this->getRequest()->getQuery("page"));
+        } else {
+            $page = 1;
+        }
+        if ($page <= 0) $page = 1;
+
 	    $comment = new CommentModel();
 
 	    $total = $comment->count();
 
-//        $pagination = new Common_Pagination();
-//        $pagination->config([
-//            'base_url' => 'http://yaf.brightdh.com/comment/index',
-//            'pagetotal' => $pagetotal,
-//            'cur_page' => $cur_page
-//        ]);
+        $pagesize = 5;
 
+        $pagetotal = ceil($total['total'] / $pagesize);
 
+        if($page > $pagetotal) $page = $pagetotal;
+
+        $offset = ($page - 1) * $pagesize;
+
+        $data = $comment->get_list($pagesize,$offset);
+
+	    $pagination = new Common_Pagination();
+
+        $pagination->config([
+            'base_url' => 'http://yaf.brightdh.com/comment/index',
+            'pagetotal' => $pagetotal,
+            'cur_page' => $page
+        ]);
 
         var_dump($total);
         return false;
