@@ -65,11 +65,9 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
-        $this->statement->setFetchMode(\PDO::FETCH_ASSOC);
         $this->statement->execute();
-        $result = $this->statement->fetchAll();
-        var_dump($this->statement,$result);
-        return array($this->statement,$result);
+        $result = $this->statement->fetchAll(\PDO::FETCH_ASSOC);
+        var_dump($sql,$this->statement,$result);
     }
 
     public function insert($sql)
@@ -101,6 +99,11 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement last_insert_id() method.
         return $this->pdo->lastInsertId();
+    }
+
+    public function free_result()
+    {
+        $this->statement->free_result();
     }
 
     public function close()
