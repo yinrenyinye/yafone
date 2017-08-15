@@ -29,12 +29,16 @@ class Database_DB
             $this->_set_driver($db_conf['driver']);
         }
 
-        var_dump($this->_driver);
+        $db_driver = new $this->_driver();
+        $db_link = $db_driver->connect([
+            'host' => $db_host,
+            'port' => $db_conf['port'],
+            'user'=> $db_conf['username'],
+            'pwd'=> $db_conf['password'],
+            'db' => $db_conf['database']
+        ]);
 
-        $db = new $this->_driver();
-
-        var_dump($db);
-        return true;
+        return $this->_set_handler($alias,$db_link);
     }
 
     private function _make_alias($driver,$host,$port,$user,$db)
@@ -44,8 +48,8 @@ class Database_DB
 
     private function _set_handler($alias , $object)
     {
-        self::$_handler[$alias] = $object;
-        return true;
+        return self::$_handler[$alias] = $object;
+
     }
 
     private function _set_driver($driver)
