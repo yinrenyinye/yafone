@@ -17,9 +17,8 @@ class Database_DB
     {
         $db_conf = Yaf_Registry::get("default_db_config");
 
+        ($is_write == 1) ? $db_host = $db_conf['write'] : $db_host = $db_conf['read'];
         var_dump($db_conf);
-        $is_write == 1 ? $db_host = $db_conf['write'] : $db_host = $db_conf['read'];
-
         $alias = $this->_make_alias($db_conf['dirver'],$db_host,$db_conf['port'],$db_conf['username'],$db_conf['database']);
 
         var_dump($alias);
