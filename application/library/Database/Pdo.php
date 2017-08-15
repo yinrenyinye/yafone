@@ -35,7 +35,7 @@ class Database_Pdo implements Database_IDatabase
     /** @var string error message*/
     protected $_error;
 
-    public function connect(array $db_conf ,$president = true, $charset = 'utf8', $timeout = 2)
+    public function connect(array $db_conf ,$president = true, $charset = 'UTF8', $timeout = 2)
     {
         // TODO: Implement connect() method.
         if(!$this->_checkConf($db_conf)) return $this->_error;
@@ -50,10 +50,11 @@ class Database_Pdo implements Database_IDatabase
                 [
                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                     \PDO::ATTR_PERSISTENT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $president,
-                    \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $timeout
+                    \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $timeout,
+                    1002 => "SET NAMES {$charset}",
                 ]
             );
-            $this->_pdo->exec("SET NAMES '".strtoupper($charset)."'");
+
             return $this->_pdo;
         }catch (Exception $e){
             echo $e->getCode()." : ".$e->getMessage();
