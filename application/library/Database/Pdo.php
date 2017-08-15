@@ -56,7 +56,8 @@ class Database_Pdo implements Database_IDatabase
 
             return $this->_pdo;
         }catch (Exception $e){
-            return $e->getCode()." : ".$e->getMessage();
+            echo $e->getCode()." : ".$e->getMessage();
+            return false;
         }
     }
 
