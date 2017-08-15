@@ -18,6 +18,6 @@ class BaseModel
 
         $this->db->table = static::$table;
 
-        $this->db->table = static::$columns;
+        $this->db->columns = static::$columns;
     }
 }
