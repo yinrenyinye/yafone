@@ -20,6 +20,9 @@ class Database_Pdo implements Database_IDatabase
     /** @var object the pdo object*/
     protected $_pdo;
 
+    /** @var object the pdo statement*/
+    protected $_statement;
+
     /** @var array database connect config */
     protected $_defultConf = [
         'host' => '127.0.0.1',
@@ -60,6 +63,9 @@ class Database_Pdo implements Database_IDatabase
     public function query($sql)
     {
         // TODO: Implement query() method.
+        $this->_statement = $this->_pdo->prepare($sql);
+        $this->_statement->execute();
+        return $this->_statement;
     }
 
     public function insert($sql)
@@ -75,6 +81,16 @@ class Database_Pdo implements Database_IDatabase
     public function delete($sql)
     {
         // TODO: Implement delete() method.
+    }
+
+    public function row()
+    {
+        return $this->_statement->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function total()
+    {
+        return $this->_statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function last_insert_id()
