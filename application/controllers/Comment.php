@@ -19,8 +19,7 @@ class CommentController extends Yaf_Controller_Abstract {
 
         $db = new Database_DB(1);
 
-        var_dump($db);
-
+        $result = $db->query("SELECT * FROM `comment`")->getOne();
         return false;
 	}
 }
