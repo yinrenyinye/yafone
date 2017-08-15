@@ -43,7 +43,7 @@ class CommentController extends Yaf_Controller_Abstract {
             'cur_page' => $page
         ]);
 
-        var_dump($total);
+        var_dump($data);
         return false;
 	}
 }
