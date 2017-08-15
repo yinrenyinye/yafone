@@ -67,7 +67,7 @@ class Database_Pdo implements Database_IDatabase
         $this->statement = $this->pdo->prepare($sql);
         $this->statement->execute();
         $result = $this->statement->fetchAll(\PDO::FETCH_ASSOC);
-        var_dump($sql,$this->statement,$result);
+        return array($sql,$this->statement,$result);
     }
 
     public function insert($sql)
