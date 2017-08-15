@@ -49,7 +49,7 @@ class Database_Pdo implements Database_IDatabase
                 $db_conf['pwd'],
                 [
                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-                    \PDO::ATTR_PERSISTENT => (!isset($db_conf['president']) || empty($db_conf['president']))? $president : $db_conf['president'],
+                    \PDO::ATTR_PERSISTENT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $president,
                     \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $timeout
                 ]
             );
