@@ -17,6 +17,5 @@ class BaseModel
         $this->db = Database_DB::getInstance();
 
         $this->db->table = static::$table;
-        var_dump($this->db->table);
     }
 }
