@@ -18,10 +18,10 @@ class Database_Pdo implements Database_IDatabase
     public $columns = [];
 
     /** @var object the pdo object*/
-    protected $_pdo;
+    public $pdo;
 
     /** @var object the pdo statement*/
-    protected $_statement;
+    public $statement;
 
     /** @var array database connect config */
     protected $_defultConf = [
@@ -43,7 +43,7 @@ class Database_Pdo implements Database_IDatabase
         if(isset($db_conf['charset']) && !empty($db_conf['charset'])) $charset = $db_conf['charset'];
 
         try{
-            $this->_pdo = new \PDO(
+            $this->pdo = new \PDO(
                 "mysql:host={$db_conf['host']};dbname={$db_conf['db']};charset={$charset};",
                 $db_conf['user'],
                 $db_conf['pwd'],
@@ -55,7 +55,7 @@ class Database_Pdo implements Database_IDatabase
                 ]
             );
 
-            return $this->_pdo;
+            return $this->pdo;
         }catch (Exception $e){
             echo $e->getCode()." : ".$e->getMessage();
             return false;
@@ -65,10 +65,9 @@ class Database_Pdo implements Database_IDatabase
     public function query($sql)
     {
         // TODO: Implement query() method.
-        $this->_statement = $this->_pdo->prepare($sql);
-        $this->_statement->setFetchMode(\PDO::FETCH_ASSOC);
-        $this->_statement->execute();
-        return $this->_statement;
+        $this->statement = $this->pdo->prepare($sql);
+        $this->statement->execute();
+        return $this->statement;
     }
 
     public function insert($sql)
@@ -88,18 +87,18 @@ class Database_Pdo implements Database_IDatabase
 
     public function row()
     {
-        return $this->_statement->fetch();
+        return $this->statement->fetch();
     }
 
     public function total()
     {
-        return $this->_statement->fetchAll();
+        return $this->statement->fetchAll();
     }
 
     public function last_insert_id()
     {
         // TODO: Implement last_insert_id() method.
-        return $this->_pdo->lastInsertId();
+        return $this->pdo->lastInsertId();
     }
 
     public function close()
