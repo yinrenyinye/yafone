@@ -21,7 +21,7 @@ class Common_Pagination
     protected $_pagesize = 5;
 
     /** @var array the pagination request filter  */
-    protected $_query_str;
+    protected $_query_str = [];
 
     /** @var int the pagination show link numbers */
     protected $_show_link_nums = 5;
