@@ -19,14 +19,14 @@ class Database_DB
 
         ($is_write == 1) ? $db_host = $db_conf['write']['host'] : $db_host = $db_conf['read']['host'];
 
-        $alias = $this->_make_alias($db_conf['dirver'],$db_host,$db_conf['port'],$db_conf['username'],$db_conf['database']);
+        $alias = $this->_make_alias($db_conf['driver'],$db_host,$db_conf['port'],$db_conf['username'],$db_conf['database']);
 
         if(isset(self::$_handler[$alias]) && !empty(self::$_handler[$alias])){
             return self::$_handler[$alias];
         }
 
         if(!empty($this->_driver)){
-            $this->_set_driver($db_conf['dirver']);
+            $this->_set_driver($db_conf['driver']);
         }
 
         var_dump($this->_driver,1111);
