@@ -28,7 +28,7 @@ class Database_DB
         return self::$_instance;
     }
 
-    public static function connect(array $db_config = [],$is_write = 1)
+    public static function connect($is_write = 1,array $db_config = [])
     {
         $db_conf = Yaf_Registry::get("default_db_config");
 
@@ -40,11 +40,15 @@ class Database_DB
             return self::$_handler[$alias];
         }
 
+        var_dump($db_conf['driver']);
+
         if(empty(self::$_driver)){
             self::_set_driver($db_conf['driver']);
         }
+        var_dump($db_conf['database'],self::$_driver);
 
         $db_driver = new self::$_driver();
+
         $db_link = $db_driver->connect([
             'host' => $db_host,
             'port' => $db_conf['port'],
