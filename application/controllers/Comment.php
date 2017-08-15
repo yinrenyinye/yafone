@@ -43,7 +43,8 @@ class CommentController extends Yaf_Controller_Abstract {
             'cur_page' => $page
         ]);
 
-        var_dump($data);
+        $page_link = $pagination->create_links();
+        var_dump($data,$page_link);
         return false;
 	}
 }
