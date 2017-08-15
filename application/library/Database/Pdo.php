@@ -67,7 +67,7 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement query() method.
         $this->statement = $this->pdo->query($sql);
         $this->statement->execute();
-        return $this->statement;
+        return $this;
     }
 
     public function insert($sql)
