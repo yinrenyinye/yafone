@@ -29,6 +29,8 @@ class Database_DB
             $this->_set_driver($db_conf['dirver']);
         }
 
+        var_dump($this->_dirver);
+
         $db = new $this->_dirver();
 
         var_dump($db);
