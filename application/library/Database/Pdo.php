@@ -40,7 +40,7 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement connect() method.
         if(!$this->_checkConf($db_conf)) return $this->_error;
 
-        if(!isset($db_conf['charset']) || empty($db_conf['charset'])) $charset = $db_conf['charset'];
+        if(isset($db_conf['charset']) && !empty($db_conf['charset'])) $charset = $db_conf['charset'];
 
         try{
             $this->_pdo = new \PDO(
