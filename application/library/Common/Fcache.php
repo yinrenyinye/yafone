@@ -32,62 +32,17 @@ class Database_Fcache
         }
     }
 
-    /**
-     * Intelligent get
-     *
-     * @param string $k
-     * @param callable array $source (eg. array($obj, 'CallbackMethod'))
-     * @param int $expire (s)
-     * @return
-     */
-    public function iget($k, $source, $expire = null)
-    {
-        $_file = $this->_f($k);
-        $_lockfile = $_file . ".lock";
-
-        // 文件不存在(首次访问)
-        if (!is_file($_file))
-        {
-            $_data = call_user_func($source);
-            if ($_data && $_data != "NULL")
-            {
-                is_file($_file) || $this->_write($_file, serialize($_data));
-            }
-
-            return $_data;
-        }
-
-        // 文件已存在但: 已过期 && 尚无其它进程发起更新
-        if (is_numeric($expire) && $this->_time - filemtime($_file) > $expire && (!is_file($_lockfile) || $this->_time - filemtime($_lockfile) > 60))
-        {
-
-            // Lock
-            is_file($_lockfile) || touch($_lockfile, $this->_time);
-
-            $_data = call_user_func($source);
-            if ($_data)
-            {
-                $this->_write($_file, serialize($_data));
-            }
-
-            // UNLock
-            is_file($_lockfile) && unlink($_lockfile);
-        }
-
-        // 返回正常(或旧的, 但在容忍范围内的) Cache 数据
-        return unserialize($this->_read($_file));
-    }
 
     /**
      * Classic
      *
      * @param string $k
      * @param int $expire
-     * @return false|data
+     * @return mixed
      */
     public function get($k, $expire = NULL)
     {
-        // 文件尚创建
+        // 文件未创建
         if (!is_file($_file = $this->_f($k)))
         {
             return false;
@@ -107,12 +62,13 @@ class Database_Fcache
 
     /**
      * @param string $k
-     * @param mix $data
+     * @param mixed $data
      */
     public function set($k, $data)
     {
         $_file = $this->_f($k);
         $this->_write($_file, serialize($data));
+        return true;
     }
 
     /**
@@ -130,7 +86,7 @@ class Database_Fcache
     /**
      * 读取文件内容
      * @param string $_file
-     * @return
+     * @return mixed
      */
     private function _read($_file)
     {
@@ -152,7 +108,7 @@ class Database_Fcache
      * @param string $_file
      * @param mixed $data
      * @param string $mode
-     * @return
+     * @return bool
      */
     private function _write($_file, $data, $mode = 'w+')
     {
