@@ -9,7 +9,7 @@
 class Database_DB
 {
     /** @var string database driver */
-    private $_dirver;
+    private $_driver;
 
     private static $_handler = [];
 
@@ -25,13 +25,13 @@ class Database_DB
             return self::$_handler[$alias];
         }
 
-        if(!empty($this->_dirver)){
+        if(!empty($this->_driver)){
             $this->_set_driver($db_conf['dirver']);
         }
 
-        var_dump($this->_dirver);
+        var_dump($this->_driver);
 
-        $db = new $this->_dirver();
+        $db = new $this->_driver();
 
         var_dump($db);
         return true;
