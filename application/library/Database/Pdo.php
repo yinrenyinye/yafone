@@ -109,12 +109,14 @@ class Database_Pdo implements Database_IDatabase
     public function free_result()
     {
         $this->statement->free_result();
+        return true;
     }
 
     public function close()
     {
         // TODO: Implement close() method.
         $this->pdo->close();
+        return true;
     }
 
     public function __set($params , $value)
