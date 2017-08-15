@@ -7,13 +7,16 @@
  */
 class BaseModel
 {
+    public static $table;
+
+    public static $columns = [];
 
     public function __construct()
     {
 
         $this->db = Database_DB::getInstance();
 
-        $this->db->table = static::$db;
+        $this->db->table = static::$table;
         var_dump($this->db->table);
     }
 }
