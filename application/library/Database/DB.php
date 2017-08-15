@@ -9,7 +9,7 @@
 class Database_DB
 {
     /** @var string database driver */
-    private $_driver;
+    private static $_driver;
 
     private static $_instance;
 
