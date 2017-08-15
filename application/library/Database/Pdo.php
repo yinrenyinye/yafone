@@ -65,6 +65,7 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement query() method.
         $this->_statement = $this->_pdo->prepare($sql);
         $this->_statement->execute();
+        var_dump(111);
         return $this->_statement;
     }
 
@@ -85,6 +86,7 @@ class Database_Pdo implements Database_IDatabase
 
     public function row()
     {
+        var_dump(22);
         return $this->_statement->fetch(\PDO::FETCH_ASSOC);
     }
 
