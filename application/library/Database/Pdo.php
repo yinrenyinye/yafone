@@ -61,13 +61,17 @@ class Database_Pdo implements Database_IDatabase
         }
     }
 
-    public function query($sql)
+    public function query($sql,array $params = [])
     {
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
-        $this->statement->execute();
 
-        var_dump(1111);
+        if(!empty($params)){
+            $this->statement->execute($params);
+        }else{
+            $this->statement->execute();
+        }
+
         return $this;
     }
 
