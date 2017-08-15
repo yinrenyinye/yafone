@@ -25,7 +25,7 @@ class Database_DB
         if(!(self::$_instance instanceof self)){
             self::$_instance = new self();
         }
-        return self::$_instance;
+        return self::$_instance->connect();
     }
 
     public static function connect($is_write = 1,array $db_config = [])
@@ -65,7 +65,6 @@ class Database_DB
     private function _set_handler($alias , $object)
     {
         return self::$_handler[$alias] = $object;
-
     }
 
     private function _set_driver($driver)
