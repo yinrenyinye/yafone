@@ -53,7 +53,7 @@ class Database_Pdo implements Database_IDatabase
                     \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $timeout
                 ]
             );
-
+            $this->_pdo->exec("SET NAMES '".strtoupper($charset)."'");
             return $this->_pdo;
         }catch (Exception $e){
             echo $e->getCode()." : ".$e->getMessage();
