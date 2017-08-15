@@ -40,12 +40,9 @@ class Database_DB
             return self::$_handler[$alias];
         }
 
-        var_dump($db_conf['driver']);
-
         if(empty(self::$_driver)){
             self::_set_driver($db_conf['driver']);
         }
-        var_dump($db_conf['database'],self::$_driver);
 
         $db_driver = new self::$_driver();
 
@@ -56,8 +53,6 @@ class Database_DB
             'pwd'=> $db_conf['password'],
             'db' => $db_conf['database']
         ]);
-
-        var_dump($db_link,111);
 
         return self::_set_handler($alias,$db_link);
     }

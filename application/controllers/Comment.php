@@ -16,8 +16,6 @@ class CommentController extends Yaf_Controller_Abstract {
 
         $db = Database_DB::getInstance();
 
-        var_dump($db,222);
-
         $result = $db->connect()->query("SELECT * FROM `comment`")->getAll();
 
         var_dump($result);
