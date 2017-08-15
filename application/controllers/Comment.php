@@ -16,6 +16,13 @@ class CommentController extends Yaf_Controller_Abstract {
 
         $db = Database_DB::getInstance();
 
+        $pagination = new Common_Pagination();
+        $pagination->config([
+            'base_url' => 'http://yaf.brightdh.com/comment/index',
+            'pagetotal' => $pagetotal,
+            'cur_page' => $cur_page
+        ]);
+
         $result = $db->query("SELECT * FROM `comment`")->getAll();
 
         var_dump($result);

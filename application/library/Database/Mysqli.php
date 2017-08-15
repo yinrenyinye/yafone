@@ -36,6 +36,11 @@ class Database_Mysqli implements Database_IDatabase
         // TODO: Implement delete() method.
     }
 
+    public function count($sql)
+    {
+        // TODO: Implement count() method.
+    }
+
     public function last_insert_id()
     {
         // TODO: Implement last_insert_id() method.

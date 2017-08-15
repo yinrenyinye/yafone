@@ -19,6 +19,8 @@ interface Database_IDatabase
 
     public function delete($sql);
 
+    public function count($sql);
+
     public function last_insert_id();
 
     public function close();
