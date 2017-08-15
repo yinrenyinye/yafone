@@ -17,7 +17,7 @@ class CommentController extends Yaf_Controller_Abstract {
 //	    $pagination = new Common_Pagination();
 //	    var_dump($pagination);
 
-        $db = new Database_DB();
+        $db = new Database_DB(1);
 
         var_dump($db);
 
