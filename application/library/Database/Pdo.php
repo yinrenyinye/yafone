@@ -44,7 +44,7 @@ class Database_Pdo implements Database_IDatabase
 
         try{
             $this->_pdo = new \PDO(
-                "mysql:host={$db_conf['host']};dbname={$db_conf};charset={$charset};",
+                "mysql:host={$db_conf['host']};dbname={$db_conf['db']};charset={$charset};",
                 $db_conf['user'],
                 $db_conf['pwd'],
                 [
