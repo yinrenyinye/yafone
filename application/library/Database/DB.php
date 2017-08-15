@@ -11,7 +11,7 @@ class Database_DB
     /** @var string database driver */
     private $_driver;
 
-    private static $_handler = [];
+    public static $_handler = [];
 
     public function __construct($is_write = 1)
     {
