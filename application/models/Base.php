@@ -7,14 +7,11 @@
  */
 class BaseModel
 {
-    protected $db;
 
     public function __construct()
     {
         $this->db = Database_DB::getInstance();
-
-        $called_class = get_called_class();
-
-        var_dump($called_class);
+        $this->db->table = static::$db;
+        var_dump($this->db->table);
     }
 }
