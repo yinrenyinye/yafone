@@ -29,10 +29,9 @@ class Database_DB
             $this->_getDriver($db_conf['dirver']);
         }
 
-        $db = new $this->_dirver;
 
-        var_dump($db);
-
+        var_dump($this->_dirver);
+        return true;
     }
 
     private function _make_alias($driver,$host,$port,$user,$db)
