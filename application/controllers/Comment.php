@@ -14,9 +14,9 @@ class CommentController extends Yaf_Controller_Abstract {
      */
 	public function indexAction($name = "Stranger") {
 
-        $db = new Database_DB(1);
+        $db = Database_DB::getInstance()->connect();
 
-        var_dump($db,111);
+        var_dump($db,222);
 
         $result = $db->query("SELECT * FROM `comment`");
 
