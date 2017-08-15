@@ -12,7 +12,7 @@ class Bootstrap extends Yaf_Bootstrap_Abstract {
     public function _initConfig() {
 		//把配置保存起来
 		$arrConfig = Yaf_Application::app()->getConfig();
-        Yaf_Registry::set('default_config', $arrConfig);
+        Yaf_Registry::set('default_app_config', $arrConfig['application']);
         Yaf_Registry::set('default_db_config', $arrConfig['database']);
 	}
 
