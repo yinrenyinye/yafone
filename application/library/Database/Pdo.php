@@ -54,9 +54,10 @@ class Database_Pdo implements Database_IDatabase
                     1002 => "SET NAMES {$charset}",
                 ]
             );
-
+            return $this;
         }catch (Exception $e){
-            echo $e->getCode()." : ".$e->getMessage();
+            return $e->getCode()." : ".$e->getMessage();
+
         }
     }
 
