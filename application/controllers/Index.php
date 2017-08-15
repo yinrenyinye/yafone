@@ -20,6 +20,7 @@ class IndexController extends Yaf_Controller_Abstract {
         $mysql = new Database_Pdo(['host' => '127.0.0.1','port' => '3306','user'=>'micle','pwd'=>'zss5494946,.']);
 
         var_dump($mysql,$name);
+
 		//1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
