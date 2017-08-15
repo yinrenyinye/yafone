@@ -12,7 +12,7 @@ class CommentModel extends BaseModel
 
     public function count()
     {
-        return $this->db->count("SELECT count(*) AS `total` FROM `{$this->table}`");
+        return $this->db->count();
     }
 
     public function get_list()
