@@ -92,12 +92,12 @@ class Database_Pdo implements Database_IDatabase
 
     public function getOne()
     {
-        return $this->statement->fetch();
+        return $this->statement->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function getAll()
     {
-        return $this->statement->fetchAll();
+        return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function last_insert_id()
