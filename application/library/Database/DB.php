@@ -17,22 +17,17 @@ class Database_DB
     {
         $db_conf = Yaf_Registry::get("default_db_config");
 
-        ($is_write == 1) ? $db_host = $db_conf['write'] : $db_host = $db_conf['read'];
+        ($is_write == 1) ? $db_host = $db_conf['write']['host'] : $db_host = $db_conf['read']['host'];
 
-        var_dump($db_host);
         $alias = $this->_make_alias($db_conf['dirver'],$db_host,$db_conf['port'],$db_conf['username'],$db_conf['database']);
-
-        var_dump($alias);
 
         if(isset(self::$_handler[$alias]) && !empty(self::$_handler[$alias])){
             return self::$_handler[$alias];
         }
 
-        var_dump(11);
         if(!empty($this->_dirver)){
             $this->_getDriver($db_conf['dirver']);
         }
-
 
         var_dump($this->_dirver);
         return true;
