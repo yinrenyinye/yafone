@@ -114,6 +114,7 @@ class Database_Pdo implements Database_IDatabase
     public function close()
     {
         // TODO: Implement close() method.
+        $this->pdo->close();
     }
 
     public function __set($params , $value)
