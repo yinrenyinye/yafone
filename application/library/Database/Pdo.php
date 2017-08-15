@@ -75,9 +75,18 @@ class Database_Pdo implements Database_IDatabase
         return $this;
     }
 
-    public function insert($sql)
+    public function insert($sql,array $params = [])
     {
         // TODO: Implement insert() method.
+        $this->statement = $this->pdo->prepare($sql);
+
+        if(!empty($params)){
+            $this->statement->execute($params);
+        }else{
+            $this->statement->execute();
+        }
+
+        return $this;
     }
 
     public function update($sql)
@@ -127,16 +136,6 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement close() method.
         $this->pdo->close();
         return true;
-    }
-
-    public function __set($params , $value)
-    {
-
-    }
-
-    public function __get($params)
-    {
-
     }
 
     private function _checkConf(array $conf)
