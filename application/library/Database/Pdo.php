@@ -128,10 +128,9 @@ class Database_Pdo implements Database_IDatabase
 
     private function _checkConf(array $conf)
     {
-        foreach ($this->_defultConf as $k => $item) {
-            if(!isset($conf[$k]) || empty($conf[$k])){
-
-                $this->_error = "config '".$k."' is must have!";
+        foreach ($this->_defultConf as $item) {
+            if(!isset($conf[$item]) || empty($conf[$item])){
+                $this->_error = "config '".$item."' is must have!";
                 return false;
             }
         }
