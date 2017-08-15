@@ -28,9 +28,11 @@ class Database_DB
         return self::$_instance->connect();
     }
 
-    public static function connect($is_write = 1,array $db_config = [])
+    public static function connect($is_write = 1,array $db_conf = [])
     {
-        $db_conf = Yaf_Registry::get("default_db_config");
+        if(empty($db_conf)){
+            $db_conf = Yaf_Registry::get("default_db_config");
+        }
 
         ($is_write == 1) ? $db_host = $db_conf['write']['host'] : $db_host = $db_conf['read']['host'];
 
