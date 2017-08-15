@@ -26,10 +26,11 @@ class Database_DB
         }
 
         if(!empty($this->_dirver)){
-            $this->_getDriver($db_conf['dirver']);
+            $this->_set_driver($db_conf['dirver']);
         }
 
-        var_dump($this->_dirver);
+        $db = new $this->_dirver();
+        var_dump($db);
         return true;
     }
 
@@ -44,9 +45,10 @@ class Database_DB
         return true;
     }
 
-    private function _getDriver($driver)
+    private function _set_driver($driver)
     {
-        return $this->_driver = "Database_".ucfirst($driver);
+        $this->_driver = "Database_".ucfirst($driver);
+        return true;
     }
 
 }
