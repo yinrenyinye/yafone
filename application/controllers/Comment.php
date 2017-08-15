@@ -14,18 +14,20 @@ class CommentController extends Yaf_Controller_Abstract {
      */
 	public function indexAction($name = "Stranger") {
 
-        $db = Database_DB::getInstance();
+	    $comment = new CommentModel();
 
-        $pagination = new Common_Pagination();
-        $pagination->config([
-            'base_url' => 'http://yaf.brightdh.com/comment/index',
-            'pagetotal' => $pagetotal,
-            'cur_page' => $cur_page
-        ]);
+	    $total = $comment->count();
 
-        $result = $db->query("SELECT * FROM `comment`")->getAll();
+//        $pagination = new Common_Pagination();
+//        $pagination->config([
+//            'base_url' => 'http://yaf.brightdh.com/comment/index',
+//            'pagetotal' => $pagetotal,
+//            'cur_page' => $cur_page
+//        ]);
 
-        var_dump($result);
+
+
+        var_dump($total);
         return false;
 	}
 }

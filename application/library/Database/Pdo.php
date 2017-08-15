@@ -100,9 +100,14 @@ class Database_Pdo implements Database_IDatabase
         return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function count($sql)
+    public function count($sql = '')
     {
         // TODO: Implement count() method.
+        if(empty($sql)){
+            return $this->query("SELECT count(*) AS `total` FROM {$this->table}")->getOne();
+        }else{
+            return $this->query($sql)->getOne();
+        }
     }
 
     public function last_insert_id()
