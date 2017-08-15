@@ -25,11 +25,11 @@ class Database_Pdo implements Database_IDatabase
 
     /** @var array database connect config */
     protected $_defultConf = [
-        'host' => '127.0.0.1',
-        'port' => '3306',
-        'user' => 'root',
-        'pwd' => '',
-        'db' => ''
+        'host' ,
+        'port' ,
+        'user' ,
+        'pwd' ,
+        'db'
     ];
 
     /** @var string error message*/
@@ -44,7 +44,7 @@ class Database_Pdo implements Database_IDatabase
 
         try{
             $this->pdo = new \PDO(
-                "mysql:host={$db_conf['host']};dbname={$db_conf['db']};charset={$charset};",
+                "mysql:host={$db_conf['host']};port={$db_conf['port']};dbname={$db_conf['db']};charset={$charset};",
                 $db_conf['user'],
                 $db_conf['pwd'],
                 [

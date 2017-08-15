@@ -10,7 +10,7 @@ class Database_DB
 {
     public function __construct()
     {
-        $config = Yaf_Registry::get("default_config");
+        $config = Yaf_Registry::get("default_db_config");
         var_dump($config);
     }
 
