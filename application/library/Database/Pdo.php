@@ -66,6 +66,8 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
         $this->statement->execute();
+
+        var_dump(1111);
         return $this;
     }
 
