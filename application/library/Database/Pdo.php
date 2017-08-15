@@ -68,6 +68,7 @@ class Database_Pdo implements Database_IDatabase
         $this->statement->setFetchMode(\PDO::FETCH_ASSOC);
         $this->statement->execute();
         $result = $this->statement->fetchAll();
+        var_dump($this->statement,$result);
         return $result;
     }
 
