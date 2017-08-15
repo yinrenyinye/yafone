@@ -8,7 +8,8 @@
  */
 interface Database_IDatabase
 {
-    public function connect($host,$db,$user,$pwd,$options = []);
+
+    public function connect(array $db_conf,$president,$charset,$timeout);
 
     public function query($sql);
 
@@ -18,7 +19,7 @@ interface Database_IDatabase
 
     public function delete($sql);
 
-    public function get_last_insert_id();
+    public function last_insert_id();
 
     public function close();
 }

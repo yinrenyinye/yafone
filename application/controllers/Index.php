@@ -14,10 +14,12 @@ class IndexController extends Yaf_Controller_Abstract {
      */
 	public function indexAction($name = "Stranger") {
 
-	    $pagination = new Common_Pagination();
-	    var_dump($pagination);
+//	    $pagination = new Common_Pagination();
+//	    var_dump($pagination);
 
-        var_dump($name);
+        $mysql = new Database_Pdo(['host' => '127.0.0.1','port' => '3306','user'=>'micle','pwd'=>'zss5494946,.']);
+
+        var_dump($mysql,$name);
 		//1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 

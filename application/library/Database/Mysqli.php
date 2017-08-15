@@ -8,7 +8,10 @@
  */
 class Database_Mysqli implements Database_IDatabase
 {
-    public function connect($host, $db, $user, $pwd, $options = [])
+
+    public $table;
+
+    public function connect(array $db_conf,$president,$charset,$timeout)
     {
         // TODO: Implement connect() method.
     }
@@ -33,9 +36,9 @@ class Database_Mysqli implements Database_IDatabase
         // TODO: Implement delete() method.
     }
 
-    public function get_last_insert_id()
+    public function last_insert_id()
     {
-        // TODO: Implement get_last_insert_id() method.
+        // TODO: Implement last_insert_id() method.
     }
 
     public function close()
