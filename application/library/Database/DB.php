@@ -30,6 +30,7 @@ class Database_DB
         }
 
         $db = new $this->_dirver();
+
         var_dump($db);
         return true;
     }
