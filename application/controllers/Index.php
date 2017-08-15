@@ -19,12 +19,9 @@ class IndexController extends Yaf_Controller_Abstract {
 
         $mysql = new Database_Pdo();
 
-        $pdo = $mysql->connect(['host' => '127.0.0.1','port' => '3306','user'=>'micle','pwd'=>'zss5494946,.','db' => 'comment']);
+        $result = $mysql->connect(['host' => '127.0.0.1','port' => '3306','user'=>'micle','pwd'=>'zss5494946,.','db' => 'comment'])->query("SELECT * FROM `comment`")->row();
 
-        $st = $pdo->prepare("SELECT * FROM `comment`");
-        $st->execute();
-        $result = $st->fetchAll(\PDO::FETCH_ASSOC);
-        var_dump($pdo,$st,$result);
+        var_dump($result);
 
 
 		//1. fetch query

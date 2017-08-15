@@ -58,6 +58,7 @@ class Database_Pdo implements Database_IDatabase
             return $this;
         }catch (Exception $e){
             echo $e->getCode()." : ".$e->getMessage();
+            return false;
         }
     }
 
@@ -66,7 +67,6 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
         $this->statement->execute();
-
         return $this;
     }
 
