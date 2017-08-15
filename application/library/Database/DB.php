@@ -31,7 +31,7 @@ class Database_DB
 
 
 
-        var_dump($this->_driver,$db_conf,2222);
+        var_dump($this->_driver,$db_conf,$db_conf['driver'],2222);
 
         $db = new $this->_driver();
 
