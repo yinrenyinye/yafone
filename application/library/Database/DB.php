@@ -22,10 +22,13 @@ class Database_DB
 
         $alias = $this->_make_alias($db_conf['dirver'],$db_host,$db_conf['port'],$db_conf['username'],$db_conf['database']);
 
+        var_dump($alias);
+
         if(isset(self::$_handler[$alias]) && !empty(self::$_handler[$alias])){
             return self::$_handler[$alias];
         }
 
+        var_dump(11);
         if(!empty($this->_dirver)){
             $this->_getDriver($db_conf['dirver']);
         }
