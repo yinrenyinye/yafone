@@ -85,12 +85,12 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement delete() method.
     }
 
-    public function row()
+    public function getOne()
     {
         return $this->statement->fetch();
     }
 
-    public function total()
+    public function getAll()
     {
         return $this->statement->fetchAll();
     }
