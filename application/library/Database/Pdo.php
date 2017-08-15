@@ -54,8 +54,8 @@ class Database_Pdo implements Database_IDatabase
                     1002 => "SET NAMES {$charset}",
                 ]
             );
-
-            return $this->pdo;
+            $this->pdo;
+            return $this;
         }catch (Exception $e){
             echo $e->getCode()." : ".$e->getMessage();
         }
@@ -66,8 +66,8 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
         $this->statement->execute();
-        $result = $this->statement->fetchAll(\PDO::FETCH_ASSOC);
-        return array($sql,$this->statement,$result);
+
+        return $this;
     }
 
     public function insert($sql)
