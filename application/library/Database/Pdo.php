@@ -138,6 +138,22 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+        $this->$name = $value;
+    }
+
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+    }
+
+    public function save()
+    {
+
+    }
+
     private function _checkConf(array $conf)
     {
         foreach ($this->_defultConf as $item) {

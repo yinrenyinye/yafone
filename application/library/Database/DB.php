@@ -74,6 +74,4 @@ class Database_DB
         self::$_driver = "Database_".ucfirst($driver);
         return true;
     }
-
-
 }
