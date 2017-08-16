@@ -167,8 +167,15 @@ class Common_Pagination
             }
         }
 
+        if('html' === $type){
+            return $this->_page_link;
+        }
 
-        return $this->_page_link;
+        if('array' === $type){
+            return $link_arr;
+        }
+
+        return false;
     }
 
     public function set_base_url($base_url)
