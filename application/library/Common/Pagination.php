@@ -52,8 +52,17 @@ class Common_Pagination
         }
     }
 
-    public function create_links()
+    /*
+     * 创建分页相关信息
+     * @param string 确定返回数据形式 value (html | array)
+     * @return mixed
+     */
+    public function create_links($type = 'html')
     {
+        if(!in_array($type,array('html','array'))){
+            return array('type'=>'error','msg'=>'Invalid Params!');
+        }
+
         if(isset($this->_pagesize) && !empty($this->_pagesize)){
             $query_all = array_merge($this->_query_str,['pagesize'=>$this->_pagesize],['page'=> '']);
         }else{
@@ -62,17 +71,32 @@ class Common_Pagination
 
         $query_link = '?'.http_build_query($query_all);
 
+        $link_arr = ['cur_page' => $this->_cur_page];
+
         if(1 < $this->_cur_page){
-            $this->_page_link .= '<a href="'.$this->_base_url.$query_link.'1">首页</a>&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.($this->_cur_page - 1).'">上一页</a>';
+            if('html' === $type){
+                $this->_page_link .= '<a href="'.$this->_base_url.$query_link.'1">首页</a>&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.($this->_cur_page - 1).'">上一页</a>';
+            }
+
+            if('array' === $type){
+                $link_arr['first_page'] = $this->_base_url.$query_link.'1';
+                $link_arr['pre_page'] = $this->_base_url.$query_link.($this->_cur_page - 1);
+            }
         }
 
         if($this->_pagetotal <= $this->_show_link_nums){
 
             for($i = 1;$i <= $this->_pagetotal;$i++){
-                if($i == $this->_cur_page){
-                    $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
-                }else{
-                    $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                if('html' === $type) {
+                    if ($i == $this->_cur_page) {
+                        $this->_page_link .= '&nbsp;&nbsp;<span>' . $i . '</span>&nbsp;&nbsp;';
+                    } else {
+                        $this->_page_link .= '&nbsp;&nbsp;<a href="' . $this->_base_url . $query_link . $i . '">' . $i . '</a>&nbsp;&nbsp;';
+                    }
+                }
+
+                if('array' === $type){
+                    $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
                 }
             }
 
@@ -83,10 +107,16 @@ class Common_Pagination
             if($this->_cur_page <= $this->_show_link_nums - $step){
 
                 for($i = 1;$i <= $this->_show_link_nums;$i++){
-                    if($i == $this->_cur_page){
-                        $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
-                    }else{
-                        $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                    if('html' === $type) {
+                        if ($i == $this->_cur_page) {
+                            $this->_page_link .= '&nbsp;&nbsp;<span>' . $i . '</span>&nbsp;&nbsp;';
+                        } else {
+                            $this->_page_link .= '&nbsp;&nbsp;<a href="' . $this->_base_url . $query_link . $i . '">' . $i . '</a>&nbsp;&nbsp;';
+                        }
+                    }
+
+                    if('array' === $type){
+                        $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
                     }
                 }
 
@@ -95,19 +125,31 @@ class Common_Pagination
                 if($this->_cur_page + $step > $this->_pagetotal){
 
                     for($i = $this->_pagetotal - $this->_show_link_nums ;$i <= $this->_pagetotal;$i++){
-                        if($i == $this->_cur_page){
-                            $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
-                        }else{
-                            $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                        if('html' === $type) {
+                            if ($i == $this->_cur_page) {
+                                $this->_page_link .= '&nbsp;&nbsp;<span>' . $i . '</span>&nbsp;&nbsp;';
+                            } else {
+                                $this->_page_link .= '&nbsp;&nbsp;<a href="' . $this->_base_url . $query_link . $i . '">' . $i . '</a>&nbsp;&nbsp;';
+                            }
+                        }
+
+                        if('array' === $type){
+                            $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
                         }
                     }
 
                 }else{
                     for($i = $this->_cur_page - $step ;$i <= $this->_cur_page + $step;$i++){
-                        if($i == $this->_cur_page){
-                            $this->_page_link .= '&nbsp;&nbsp;<span>'.$i.'</span>&nbsp;&nbsp;';
-                        }else{
-                            $this->_page_link .= '&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$i.'">'.$i.'</a>&nbsp;&nbsp;';
+                        if('html' === $type) {
+                            if ($i == $this->_cur_page) {
+                                $this->_page_link .= '&nbsp;&nbsp;<span>' . $i . '</span>&nbsp;&nbsp;';
+                            } else {
+                                $this->_page_link .= '&nbsp;&nbsp;<a href="' . $this->_base_url . $query_link . $i . '">' . $i . '</a>&nbsp;&nbsp;';
+                            }
+                        }
+
+                        if('array' === $type){
+                            $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
                         }
                     }
                 }
@@ -116,8 +158,15 @@ class Common_Pagination
         }
 
         if($this->_cur_page < $this->_pagetotal){
-            $this->_page_link .= '<a href="'.$this->_base_url.$query_link.($this->_cur_page + 1).'">下一页</a>&nbsp;&nbsp;<a href="'.$this->_base_url.$query_link.$this->_pagetotal.'">尾页</a>';
+            if('html' === $type) {
+                $this->_page_link .= '<a href="' . $this->_base_url . $query_link . ($this->_cur_page + 1) . '">下一页</a>&nbsp;&nbsp;<a href="' . $this->_base_url . $query_link . $this->_pagetotal . '">尾页</a>';
+            }
+            if('array' === $type){
+                $link_arr['next_page'] = $this->_base_url . $query_link . ($this->_cur_page + 1);
+                $link_arr['last_page'] = $this->_base_url . $query_link . $this->_pagetotal;
+            }
         }
+
 
         return $this->_page_link;
     }
