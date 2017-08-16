@@ -69,9 +69,13 @@ class Common_Pagination
             $query_all = array_merge($this->_query_str,['page'=> '']);
         }
 
-        $query_link = '?'.http_build_query($query_all);
+        if('html' == $type){
+            $query_link = "?".http_build_query($query_all);
+        }else{
+            $query_link = http_build_query($query_all);
+        }
 
-        $link_arr = ['cur_page' => $this->_cur_page];
+        $link_arr = ['base_url' => $this->_base_url,'cur_page' => $this->_cur_page];
 
         if(1 < $this->_cur_page){
             if('html' === $type){
@@ -79,8 +83,8 @@ class Common_Pagination
             }
 
             if('array' === $type){
-                $link_arr['first_page'] = $this->_base_url.$query_link.'1';
-                $link_arr['pre_page'] = $this->_base_url.$query_link.($this->_cur_page - 1);
+                $link_arr['first_page'] = $query_link.'1';
+                $link_arr['pre_page'] = $query_link.($this->_cur_page - 1);
             }
         }
 
@@ -96,7 +100,7 @@ class Common_Pagination
                 }
 
                 if('array' === $type){
-                    $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
+                    $link_arr['loop_page'][] = $query_link . $i;
                 }
             }
 
@@ -116,7 +120,7 @@ class Common_Pagination
                     }
 
                     if('array' === $type){
-                        $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
+                        $link_arr['loop_page'][] = $query_link . $i;
                     }
                 }
 
@@ -134,7 +138,7 @@ class Common_Pagination
                         }
 
                         if('array' === $type){
-                            $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
+                            $link_arr['loop_page'][] = $query_link . $i;
                         }
                     }
 
@@ -149,7 +153,7 @@ class Common_Pagination
                         }
 
                         if('array' === $type){
-                            $link_arr['loop_page'][] = $this->_base_url . $query_link . $i;
+                            $link_arr['loop_page'][] = $query_link . $i;
                         }
                     }
                 }
@@ -161,9 +165,10 @@ class Common_Pagination
             if('html' === $type) {
                 $this->_page_link .= '<a href="' . $this->_base_url . $query_link . ($this->_cur_page + 1) . '">下一页</a>&nbsp;&nbsp;<a href="' . $this->_base_url . $query_link . $this->_pagetotal . '">尾页</a>';
             }
+
             if('array' === $type){
-                $link_arr['next_page'] = $this->_base_url . $query_link . ($this->_cur_page + 1);
-                $link_arr['last_page'] = $this->_base_url . $query_link . $this->_pagetotal;
+                $link_arr['next_page'] = $query_link . ($this->_cur_page + 1);
+                $link_arr['last_page'] = $query_link . $this->_pagetotal;
             }
         }
 
