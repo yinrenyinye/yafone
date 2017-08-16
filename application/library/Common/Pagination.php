@@ -75,7 +75,7 @@ class Common_Pagination
             $query_link = http_build_query($query_all);
         }
 
-        $link_arr = ['base_url' => $this->_base_url,'cur_page' => $this->_cur_page];
+        $link_arr = ['base_url' => $this->_base_url,'cur_page' => $this->_cur_page ,'loop_page' => []];
 
         if(1 < $this->_cur_page){
             if('html' === $type){
