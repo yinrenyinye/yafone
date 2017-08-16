@@ -18,7 +18,7 @@ class Common_Pagination
     protected $_cur_page;
 
     /** @var int the pagination data numbers*/
-    protected $_pagesize = 5;
+    protected $_pagesize;
 
     /** @var array the pagination request filter  */
     protected $_query_str = [];
