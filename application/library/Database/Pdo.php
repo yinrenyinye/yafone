@@ -13,7 +13,7 @@ class Database_Pdo implements Database_IDatabase
 
     /**
      * @var array database table columns
-     * exmaple [ 'id' => ['data_type','length','is_unique(0|1)']]
+     * exmaple [ 'id' => 1]
      */
     public $columns = [];
 

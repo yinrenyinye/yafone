@@ -22,4 +22,18 @@ class BaseModel
 
         $this->_db->columns = static::$columns;
     }
+
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+
+        if(in_array($name,self::$columns)){
+            $this->_db->columns[$name] = $value;
+        }
+    }
+
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+    }
 }
