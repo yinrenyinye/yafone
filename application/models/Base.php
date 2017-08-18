@@ -40,10 +40,10 @@ class BaseModel
         return $this->_db->getFields($name);
     }
 
-    public function __call($name, $arguments)
+    public function __call($name, $params)
     {
         // TODO: Implement __call() method.
-        $this->_db->$name($arguments);
-        return true;
+        var_dump($params);
+        return $this->_db->$name($params);
     }
 }

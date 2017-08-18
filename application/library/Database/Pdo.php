@@ -152,19 +152,12 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
-    public function __call($name, $arguments)
-    {
-        // TODO: Implement __call() method.
-        $method = "_" . $name;
-        return $this->$method($arguments);
-    }
-
-    private function _save($arguments = '')
+    public function save($where)
     {
 
     }
 
-    private function _create($arguments = '')
+    public function create()
     {
 
     }
