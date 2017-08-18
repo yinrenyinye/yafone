@@ -154,8 +154,8 @@ class Database_Pdo implements Database_IDatabase
 
     public function save($params)
     {
+        $sql = "";
         if(is_array($params)){
-            $sql = "";
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
             foreach($this->fields as $k => $v){
@@ -164,9 +164,31 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
-
             var_dump($sql,$column_value);
-//            $this->update();
+        }
+
+        if(is_string($params) && strpos($params,"=") !== false){
+            $sql .= "UPDATE `".$this->table."` SET";
+            $column_value = [];
+            foreach($this->fields as $k => $v){
+                $sql .= " `".$k."`=? ,";
+                $column_value[] = $v;
+            }
+
+            $sql .= rtrim($sql,",")." WHERE ".$params;
+            var_dump($column_value,$sql);
+        }
+
+        if(is_numeric(intval($params)) && intval($params) > 0){
+            $sql .= "UPDATE `".$this->table."` SET";
+            $column_value = [];
+            foreach($this->fields as $k => $v){
+                $sql .= " `".$k."`=? ,";
+                $column_value[] = $v;
+            }
+
+            $sql .= rtrim($sql,",")." WHERE `id`=".$params;
+            var_dump($column_value,$sql);
         }
     }
 
