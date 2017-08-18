@@ -190,7 +190,7 @@ class Database_Pdo implements Database_IDatabase
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($set_sql,",")." WHERE `id`=".$params[0];
+            $sql .= rtrim($set_sql,",")." WHERE `id`=".intval($params[0]);
             var_dump($column_value,$sql);
         }
     }
