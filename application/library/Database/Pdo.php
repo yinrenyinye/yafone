@@ -256,12 +256,23 @@ class Database_Pdo implements Database_IDatabase
 
     public function destory($params)
     {
-        if(is_numeric($params[0]) && intval($params[0]) > 0){
-            $sql = "";
-            $sql .= "DELETE FROM `".$this->tableName."`";
-        }else{
-            return $this->_error = "Invalid params!";
+        if(is_array($params)){
+            if(is_numeric($params[0]) && intval($params[0]) > 0){
+                $sql = "DELETE FROM `".$this->tableName."` WHERE `id`=?";
+                $column_value = $params;
+                $this->delete($sql,$column_value);
+            }else{
+                return $this->_error = "Invalid params!";
+            }
         }
+
+        if(is_numeric($params) && intval($params) > 0){
+            $sql = "";
+            $column_value = [$params];
+            $this->delete($sql,$column_value);
+        }
+
+        return $this->_error = "Invalid params!";
     }
 
     private function _checkConf(array $conf)
