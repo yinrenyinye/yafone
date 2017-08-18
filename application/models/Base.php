@@ -37,7 +37,6 @@ class BaseModel
     public function __get($name)
     {
         // TODO: Implement __get() method.
-        var_dump($this->_db->getFields($name), $name);
         return $this->_db->getFields($name);
     }
 
