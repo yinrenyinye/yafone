@@ -214,7 +214,7 @@ class Database_Pdo implements Database_IDatabase
     public function create()
     {
         $sql = "";
-        $sql = "INSERT INTO `".$this->table."` (";
+        $sql .= "INSERT INTO `".$this->table."` (";
         $i_sql = "";
         $v_sql = "";
         foreach ($this->fields as $k=>$v){
