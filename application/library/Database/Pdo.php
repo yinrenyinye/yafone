@@ -155,7 +155,8 @@ class Database_Pdo implements Database_IDatabase
     public function save($params)
     {
         if(is_array($params)){
-            $sql = "UPDATE `".$this->table."` SET";
+            $sql = "";
+            $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
             foreach($this->fields as $k => $v){
                 $sql .= " `".$k."`=? ,";
