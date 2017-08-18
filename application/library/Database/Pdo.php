@@ -106,10 +106,18 @@ class Database_Pdo implements Database_IDatabase
         return $res;
     }
 
-    public function delete($sql)
+    public function delete($sql,array $params = [])
     {
         // TODO: Implement delete() method.
+        $this->statement = $this->pdo->prepare($sql);
 
+        if (!empty($params)) {
+            $res = $this->statement->execute($params);
+        } else {
+            $res = $this->statement->execute();
+        }
+
+        return $res;
     }
 
     public function getOne()
