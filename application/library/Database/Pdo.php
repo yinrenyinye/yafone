@@ -17,6 +17,9 @@ class Database_Pdo implements Database_IDatabase
      */
     public $columns = [];
 
+    /** @var array set table columns value */
+    public $fields = [];
+
     /** @var object the pdo object */
     public $pdo;
 
@@ -143,7 +146,7 @@ class Database_Pdo implements Database_IDatabase
         // TODO: Implement __set() method.
 
         if(in_array($name,$this->columns)){
-            $this->columns[$name]['field'] = $value;
+            $this->fields[$name] = $value;
             return true;
         }
 
