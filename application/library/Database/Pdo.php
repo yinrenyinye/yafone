@@ -180,10 +180,11 @@ class Database_Pdo implements Database_IDatabase
             $w_sql = "";
             foreach($params[0] as $kw => $vw){
                 $w_sql .= " `".$kw."`=? AND";
+                $column_value[] = $vw;
             }
             $sql .= rtrim($w_sql,"AND");
 
-            var_dump($sql);exit();
+            var_dump($sql,$column_value);exit();
         }
 
         if(is_string($params[0]) && strpos($params[0],"=") !== false){
