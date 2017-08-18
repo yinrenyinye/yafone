@@ -21,9 +21,8 @@ class IndexController extends Yaf_Controller_Abstract
 
         $comment->username = "micle";
         $comment->content = "this is a simple orm test";
-        $comment->test = 222;
 
-        $comment->save();
+        $comment->save(['id' => 1]);
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
