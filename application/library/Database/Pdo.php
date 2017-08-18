@@ -92,7 +92,7 @@ class Database_Pdo implements Database_IDatabase
         return $this;
     }
 
-    public function update($sql)
+    public function update($sql, array $parmas = [])
     {
         // TODO: Implement update() method.
     }
@@ -152,9 +152,21 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
-    public function save($where)
+    public function save($params)
     {
-        var_dump($where);
+        if(is_array($params)){
+            $sql = "UPDATE `".$this->table."` SET";
+            $column_value = [];
+            foreach($this->fields as $k => $v){
+                $sql .= " `".$k."`=? ,";
+                $column_value[] = $v;
+            }
+
+            $sql .= rtrim($sql,",")." WHERE ".implode("=",$params[0]);
+
+            var_dump($sql,$column_value);
+//            $this->update();
+        }
     }
 
     public function create()
