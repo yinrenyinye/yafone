@@ -154,7 +154,7 @@ class Database_Pdo implements Database_IDatabase
 
     public function save($where)
     {
-
+        var_dump($where);
     }
 
     public function create()
