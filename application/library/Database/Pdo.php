@@ -92,7 +92,7 @@ class Database_Pdo implements Database_IDatabase
         return $res;
     }
 
-    public function update($sql, array $parmas = [])
+    public function update($sql, array $params = [])
     {
         // TODO: Implement update() method.
         $this->statement = $this->pdo->prepare($sql);
