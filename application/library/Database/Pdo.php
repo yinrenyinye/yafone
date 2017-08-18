@@ -153,6 +153,12 @@ class Database_Pdo implements Database_IDatabase
         return false;
     }
 
+    public function __get($name)
+    {
+        // TODO: Implement __get() method.
+        return $this->$name;
+    }
+
     public function __call($name, $arguments)
     {
         // TODO: Implement __call() method.
