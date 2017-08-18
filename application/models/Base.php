@@ -26,4 +26,18 @@ class BaseModel
 
         $this->_db->columns = static::$columns;
     }
+
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+        $this->_db->$name = $value;
+        return true;
+    }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement __call() method.
+        $this->_db->$name($arguments);
+        return true;
+    }
 }

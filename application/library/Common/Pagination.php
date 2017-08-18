@@ -217,7 +217,8 @@ class Common_Pagination
 
     public function __set($name , $value)
     {
-        return $this->$name = $value;
+        $this->$name = $value;
+        return true;
     }
 
 }
