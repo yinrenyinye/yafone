@@ -158,36 +158,39 @@ class Database_Pdo implements Database_IDatabase
         if(is_array($params)){
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
+            $set_sql = "";
             foreach($this->fields as $k => $v){
-                $sql .= " `".$k."`=? ,";
+                $set_sql .= " `".$k."`=? ,";
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
+            $sql .= rtrim($set_sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
             var_dump($sql,$column_value);
         }
 
         if(is_string($params) && strpos($params,"=") !== false){
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
+            $set_sql = "";
             foreach($this->fields as $k => $v){
-                $sql .= " `".$k."`=? ,";
+                $set_sql .= " `".$k."`=? ,";
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($sql,",")." WHERE ".$params[0];
+            $sql .= rtrim($set_sql,",")." WHERE ".$params[0];
             var_dump($column_value,$sql);
         }
 
-        if(is_numeric(intval($params)) && intval($params) > 0){
+        if(is_numeric(intval($params[0])) && intval($params[0]) > 0){
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
+            $set_sql = "";
             foreach($this->fields as $k => $v){
-                $sql .= " `".$k."`=? ,";
+                $set_sql .= " `".$k."`=? ,";
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($sql,",")." WHERE `id`=".$params[0];
+            $sql .= rtrim($set_sql,",")." WHERE `id`=".$params[0];
             var_dump($column_value,$sql);
         }
     }
