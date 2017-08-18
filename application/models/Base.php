@@ -9,7 +9,7 @@ class BaseModel
 {
     protected $_db;
 
-    protected static $table;
+    protected static $tableName;
 
     protected static $columns = [];
 
@@ -22,7 +22,7 @@ class BaseModel
 
         $this->_db = Database_DB::getInstance(self::$is_write, self::$db_conf);
 
-        $this->_db->table = static::$table;
+        $this->_db->table = static::$tableName;
 
         $this->_db->columns = static::$columns;
     }
@@ -45,7 +45,7 @@ class BaseModel
         // TODO: Implement __call() method.
         foreach($this->_db->fields as $k => $item){
             if(!isset(static::$columns[$k])){
-                echo 'The column '.$k.' not exists in table '.static::$table;
+                echo 'The column '.$k.' not exists in table '.static::$tableName;
                 return false;
             }
         }

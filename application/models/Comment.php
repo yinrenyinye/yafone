@@ -8,7 +8,7 @@
 class CommentModel extends BaseModel
 {
 
-    protected static $table = 'comment';
+    protected static $tableName = 'comment';
 
     protected static $columns = [
         'id' => 1,
@@ -29,6 +29,6 @@ class CommentModel extends BaseModel
 
     public function table_name()
     {
-        return self::$table;
+        return self::$tableName;
     }
 }

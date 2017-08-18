@@ -9,7 +9,7 @@
 class Database_Pdo implements Database_IDatabase
 {
     /** @var string database table name */
-    public $table;
+    public $tableName;
 
     /**
      * @var array database table columns
@@ -134,7 +134,7 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement count() method.
         if (empty($sql)) {
-            return $this->query("SELECT count(*) AS `total` FROM `{$this->table}`")->getOne();
+            return $this->query("SELECT count(*) AS `total` FROM `{$this->tableName}`")->getOne();
         } else {
             return $this->query($sql)->getOne();
         }
@@ -174,7 +174,7 @@ class Database_Pdo implements Database_IDatabase
     {
         if(is_array($params[0])){
             $sql = "";
-            $sql .= "UPDATE `".$this->table."` SET";
+            $sql .= "UPDATE `".$this->tableName."` SET";
             $column_value = [];
             $set_sql = "";
             foreach($this->fields as $ks => $vs){
@@ -201,7 +201,7 @@ class Database_Pdo implements Database_IDatabase
 
         if(is_string($params[0]) && strpos($params[0],"=") !== false){
             $sql = "";
-            $sql .= "UPDATE `".$this->table."` SET";
+            $sql .= "UPDATE `".$this->tableName."` SET";
             $column_value = [];
             $set_sql = "";
             foreach($this->fields as $k => $v){
@@ -214,7 +214,7 @@ class Database_Pdo implements Database_IDatabase
 
         if(is_numeric($params[0]) && intval($params[0]) > 0){
             $sql = "";
-            $sql .= "UPDATE `".$this->table."` SET";
+            $sql .= "UPDATE `".$this->tableName."` SET";
             $column_value = [];
             $set_sql = "";
             foreach($this->fields as $k => $v){
@@ -236,7 +236,7 @@ class Database_Pdo implements Database_IDatabase
     public function create()
     {
         $sql = "";
-        $sql .= "INSERT INTO `".$this->table."` (";
+        $sql .= "INSERT INTO `".$this->tableName."` (";
         $i_sql = "";
         $v_sql = "";
         $column_value = [];
@@ -249,6 +249,16 @@ class Database_Pdo implements Database_IDatabase
         if(!empty($i_sql) && !empty($v_sql) && !empty($column_value)){
             $this->insert($sql,$column_value);
             return true;
+        }else{
+            return $this->_error = "Invalid params!";
+        }
+    }
+
+    public function destory($params)
+    {
+        if(is_numeric($params[0]) && intval($params[0]) > 0){
+            $sql = "";
+            $sql .= "DELETE FROM `".$this->tableName."`";
         }else{
             return $this->_error = "Invalid params!";
         }
