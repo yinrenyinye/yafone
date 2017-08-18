@@ -30,15 +30,14 @@ class BaseModel
     public function __set($name, $value)
     {
         // TODO: Implement __set() method.
-        $this->_db->$name = $value;
-        var_dump($this->_db->$name);
+        $this->_db->createFields([$name => $value]);
         return true;
     }
 
     public function __get($name)
     {
         // TODO: Implement __get() method.
-        return $this->_db->$name;
+        return $this->_db->getFields($name);
     }
 
     public function __call($name, $arguments)

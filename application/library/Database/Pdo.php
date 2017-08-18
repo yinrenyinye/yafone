@@ -141,24 +141,6 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
-    public function __set($name, $value)
-    {
-        // TODO: Implement __set() method.
-
-        if(in_array($name,$this->columns)){
-            $this->fields[$name] = $value;
-            return true;
-        }
-
-        return false;
-    }
-
-    public function __get($name)
-    {
-        // TODO: Implement __get() method.
-        return $this->$name;
-    }
-
     public function __call($name, $arguments)
     {
         // TODO: Implement __call() method.
@@ -174,6 +156,17 @@ class Database_Pdo implements Database_IDatabase
     private function _create($arguments = '')
     {
 
+    }
+
+    private function _getFields($arguments)
+    {
+        return $this->$arguments;
+    }
+
+    private function _createFields($arguments)
+    {
+        $this->fields[key($arguments)] = current($value);
+        return true;
     }
 
     private function _checkConf(array $conf)
