@@ -154,8 +154,9 @@ class Database_Pdo implements Database_IDatabase
 
     public function save($params)
     {
-        $sql = "";
+
         if(is_array($params)){
+            $sql = "";
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
             $set_sql = "";
@@ -165,10 +166,11 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($set_sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
-            var_dump($sql,$column_value);
+            var_dump($sql);
         }
 
-        if(is_string($params) && strpos($params,"=") !== false){
+        if(is_string($params[0]) && strpos($params[0],"=") !== false){
+            $sql = "";
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
             $set_sql = "";
@@ -178,10 +180,11 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($set_sql,",")." WHERE ".$params[0];
-            var_dump($column_value,$sql);
+            var_dump("string",$sql);
         }
 
-        if(is_numeric(intval($params[0])) && intval($params[0]) > 0){
+        if(is_numeric($params[0]) && intval($params[0]) > 0){
+            $sql = "";
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
             $set_sql = "";
@@ -191,7 +194,7 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($set_sql,",")." WHERE `id`=".intval($params[0]);
-            var_dump($column_value,$sql);
+            var_dump("int",$sql);
         }
     }
 
