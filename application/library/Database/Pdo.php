@@ -213,7 +213,16 @@ class Database_Pdo implements Database_IDatabase
 
     public function create()
     {
-
+        $sql = "";
+        $sql = "INSERT INTO `".$this->table."` (";
+        $i_sql = "";
+        $v_sql = "";
+        foreach ($this->fields as $k=>$v){
+            $i_sql .= "`{$k}`,";
+            $v_sql .= "?,";
+        }
+        $sql .= rtrim($i_sql,",").") VALUES (".rtrim($v_sql,",").")";
+        var_dump($sql);
     }
 
     private function _checkConf(array $conf)
