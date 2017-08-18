@@ -240,12 +240,15 @@ class Database_Pdo implements Database_IDatabase
         $i_sql = "";
         $v_sql = "";
         $column_value = [];
+
         foreach ($this->fields as $k=>$v){
             $i_sql .= "`{$k}`,";
             $v_sql .= "?,";
             $column_value[] = $v;
         }
+
         $sql .= rtrim($i_sql,",").") VALUES (".rtrim($v_sql,",").")";
+
         if(!empty($i_sql) && !empty($v_sql) && !empty($column_value)){
             $this->insert($sql,$column_value);
             return true;
