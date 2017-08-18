@@ -49,6 +49,7 @@ class BaseModel
                 return false;
             }
         }
+
         return $this->_db->$name($params);
     }
 }
