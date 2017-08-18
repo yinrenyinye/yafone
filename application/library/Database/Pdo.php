@@ -224,7 +224,12 @@ class Database_Pdo implements Database_IDatabase
             $column_value[] = $v;
         }
         $sql .= rtrim($i_sql,",").") VALUES (".rtrim($v_sql,",").")";
-        var_dump($sql,$column_value);
+        if(!empty($i_sql) && !empty($v_sql) && !empty($column_value)){
+            $this->insert($sql,$column_value);
+            return true;
+        }else{
+            return $this->_error = "Invalid params!";
+        }
     }
 
     private function _checkConf(array $conf)
