@@ -95,6 +95,15 @@ class Database_Pdo implements Database_IDatabase
     public function update($sql, array $parmas = [])
     {
         // TODO: Implement update() method.
+        $this->statement = $this->pdo->prepare($sql);
+
+        if (!empty($params)) {
+            $this->statement->execute($params);
+        } else {
+            $this->statement->execute();
+        }
+
+        return $this;
     }
 
     public function delete($sql)
@@ -166,7 +175,6 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($set_sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
-            var_dump($sql);
         }
 
         if(is_string($params[0]) && strpos($params[0],"=") !== false){
@@ -180,7 +188,6 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($set_sql,",")." WHERE ".$params[0];
-            var_dump("string",$sql);
         }
 
         if(is_numeric($params[0]) && intval($params[0]) > 0){
@@ -194,7 +201,12 @@ class Database_Pdo implements Database_IDatabase
             }
 
             $sql .= rtrim($set_sql,",")." WHERE `id`=".intval($params[0]);
-            var_dump("int",$sql);
+        }
+        if(!empty($sql) && !empty($column_value)){
+            $this->update($sql,$column_value);
+            return true;
+        }else{
+            return $this->_error = "Invalid params !";
         }
     }
 
