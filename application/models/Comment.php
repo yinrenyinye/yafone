@@ -8,7 +8,7 @@
 class CommentModel extends BaseModel
 {
 
-    public static $table = 'comment';
+    protected static $table = 'comment';
 
     public function count()
     {

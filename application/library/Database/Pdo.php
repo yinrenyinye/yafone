@@ -13,7 +13,7 @@ class Database_Pdo implements Database_IDatabase
 
     /**
      * @var array database table columns
-     * exmaple [ 'id' => 1]
+     * exmaple [ 'id' => ['field' => 1,'type' => 'int','index' => 'primary']]
      */
     public $columns = [];
 
@@ -50,7 +50,7 @@ class Database_Pdo implements Database_IDatabase
                 [
                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
                     \PDO::ATTR_PERSISTENT => (isset($db_conf['president']) && !empty($db_conf['president'])) ? $db_conf['president'] : $president,
-                    \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president'])) ? $db_conf['president'] : $timeout,
+                    \PDO::ATTR_TIMEOUT => (isset($db_conf['timeout']) && !empty($db_conf['timeout'])) ? $db_conf['timeout'] : $timeout,
                     1002 => "SET NAMES {$charset}",
                 ]
             );
@@ -138,12 +138,31 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
-    public function save($arguments)
+    public function __set($name, $value)
+    {
+        // TODO: Implement __set() method.
+
+        if(in_array($name,$this->columns)){
+            $this->columns[$name]['field'] = $value;
+            return true;
+        }
+
+        return false;
+    }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement __call() method.
+        $method = "_".$name;
+        return $this->$method($arguments);
+    }
+
+    private function _save($arguments = '')
     {
 
     }
 
-    public function create()
+    private function _create($arguments = '')
     {
 
     }

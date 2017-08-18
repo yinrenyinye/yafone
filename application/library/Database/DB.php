@@ -53,7 +53,10 @@ class Database_DB
             'port' => $db_conf['port'],
             'user'=> $db_conf['username'],
             'pwd'=> $db_conf['password'],
-            'db' => $db_conf['database']
+            'db' => $db_conf['database'],
+            'charset' => $db_conf['charset'],
+            'president' => $db_conf['president'],
+            'timeout' => $db_conf['timeout']
         ]);
 
         return self::_set_handler($alias,$db_link);

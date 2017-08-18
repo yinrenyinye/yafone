@@ -9,37 +9,21 @@ class BaseModel
 {
     protected $_db;
 
-    public static $table;
+    protected static $table;
 
-    public static $columns = [];
+    protected static $columns = [];
+
+    protected static $is_write = 1;
+
+    protected static $db_conf = [];
 
     public function __construct()
     {
 
-        $this->_db = Database_DB::getInstance();
+        $this->_db = Database_DB::getInstance(self::$is_write,self::$db_conf);
 
         $this->_db->table = static::$table;
 
         $this->_db->columns = static::$columns;
-    }
-
-    public function __set($name, $value)
-    {
-        // TODO: Implement __set() method.
-
-        if(in_array($name,self::$columns)){
-            $this->_db->columns[$name] = $value;
-        }
-    }
-
-    public function __get($name)
-    {
-        // TODO: Implement __get() method.
-    }
-
-    public function __call($name, $arguments)
-    {
-        // TODO: Implement __call() method.
-        return $this->_db->$name($arguments);
     }
 }
