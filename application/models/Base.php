@@ -20,7 +20,7 @@ class BaseModel
     public function __construct()
     {
 
-        $this->_db = Database_DB::getInstance(self::$is_write,self::$db_conf);
+        $this->_db = Database_DB::getInstance(self::$is_write, self::$db_conf);
 
         $this->_db->table = static::$table;
 
@@ -30,14 +30,14 @@ class BaseModel
     public function __set($name, $value)
     {
         // TODO: Implement __set() method.
-        $this->_db->createFields([$name => $value]);
+        $this->_db->createFields($name, $value);
         return true;
     }
 
     public function __get($name)
     {
         // TODO: Implement __get() method.
-        var_dump($this->_db->getFields($name),$name);
+        var_dump($this->_db->getFields($name), $name);
         return $this->_db->getFields($name);
     }
 

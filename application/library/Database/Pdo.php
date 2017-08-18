@@ -141,10 +141,21 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
+    public function getFields($name)
+    {
+        return $this->$name;
+    }
+
+    public function createFields($name, $value)
+    {
+        $this->fields[$name] = $value;
+        return true;
+    }
+
     public function __call($name, $arguments)
     {
         // TODO: Implement __call() method.
-        $method = "_".$name;
+        $method = "_" . $name;
         return $this->$method($arguments);
     }
 
@@ -156,17 +167,6 @@ class Database_Pdo implements Database_IDatabase
     private function _create($arguments = '')
     {
 
-    }
-
-    private function _getFields($arguments)
-    {
-        return $this->$arguments;
-    }
-
-    private function _createFields($arguments)
-    {
-        $this->fields[key($arguments)] = current($value);
-        return true;
     }
 
     private function _checkConf(array $conf)
