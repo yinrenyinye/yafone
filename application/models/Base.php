@@ -31,6 +31,7 @@ class BaseModel
     {
         // TODO: Implement __set() method.
         $this->_db->$name = $value;
+        var_dump($this->_db->$name);
         return true;
     }
 
