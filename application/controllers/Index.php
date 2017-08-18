@@ -22,7 +22,7 @@ class IndexController extends Yaf_Controller_Abstract
         $comment->username = "micle";
         $comment->content = "this is a simple orm test";
 
-        var_dump($comment,$comment->fields,2);
+        var_dump($comment->fields,2);
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
