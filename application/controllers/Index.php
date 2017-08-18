@@ -22,7 +22,9 @@ class IndexController extends Yaf_Controller_Abstract
         $comment->username = "miclezss";
         $comment->content = "this is a update simple orm test";
 
-        $comment->save(['id'=> 34,'username' => 'micle']);
+        $comment->save(['id'=> 32,'username' => 'micle']);
+
+        $comment->destory(30);
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
