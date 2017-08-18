@@ -182,6 +182,13 @@ class Database_Pdo implements Database_IDatabase
                 $column_value[] = $vw;
             }
             $sql .= rtrim($w_sql,"AND");
+
+            if(!empty($sql) && !empty($w_sql) && !empty($column_value)){
+                $this->update($sql,$column_value);
+                return true;
+            }else{
+                return $this->_error = "Invalid params!";
+            }
         }
 
         if(is_string($params[0]) && strpos($params[0],"=") !== false){
