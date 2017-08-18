@@ -22,7 +22,7 @@ class BaseModel
 
         $this->_db = Database_DB::getInstance(self::$is_write, self::$db_conf);
 
-        $this->_db->table = static::$tableName;
+        $this->_db->tableName = static::$tableName;
 
         $this->_db->columns = static::$columns;
     }
