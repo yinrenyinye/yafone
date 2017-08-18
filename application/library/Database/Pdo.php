@@ -202,11 +202,12 @@ class Database_Pdo implements Database_IDatabase
 
             $sql .= rtrim($set_sql,",")." WHERE `id`=".intval($params[0]);
         }
+
         if(!empty($sql) && !empty($column_value)){
             $this->update($sql,$column_value);
             return true;
         }else{
-            return $this->_error = "Invalid params !";
+            return $this->_error = "Invalid params!";
         }
     }
 
