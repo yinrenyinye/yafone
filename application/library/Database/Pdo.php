@@ -164,7 +164,6 @@ class Database_Pdo implements Database_IDatabase
 
     public function save($params)
     {
-
         if(is_array($params[0])){
             $sql = "";
             $sql .= "UPDATE `".$this->table."` SET";
@@ -183,8 +182,6 @@ class Database_Pdo implements Database_IDatabase
                 $column_value[] = $vw;
             }
             $sql .= rtrim($w_sql,"AND");
-
-            var_dump($sql,$column_value);exit();
         }
 
         if(is_string($params[0]) && strpos($params[0],"=") !== false){
