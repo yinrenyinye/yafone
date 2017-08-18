@@ -109,6 +109,7 @@ class Database_Pdo implements Database_IDatabase
     public function delete($sql)
     {
         // TODO: Implement delete() method.
+
     }
 
     public function getOne()
@@ -164,17 +165,25 @@ class Database_Pdo implements Database_IDatabase
     public function save($params)
     {
 
-        if(is_array($params)){
+        if(is_array($params[0])){
             $sql = "";
             $sql .= "UPDATE `".$this->table."` SET";
             $column_value = [];
             $set_sql = "";
-            foreach($this->fields as $k => $v){
-                $set_sql .= " `".$k."`=? ,";
-                $column_value[] = $v;
+            foreach($this->fields as $ks => $vs){
+                $set_sql .= " `".$ks."`=? ,";
+                $column_value[] = $vs;
             }
 
-            $sql .= rtrim($set_sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
+            $sql .= rtrim($set_sql,",")." WHERE ";
+
+            $w_sql = "";
+            foreach($params[0] as $kw => $vw){
+                $w_sql .= " `".$kw."`=? AND";
+            }
+            $sql .= rtrim($w_sql,"AND");
+
+            var_dump($sql);exit();
         }
 
         if(is_string($params[0]) && strpos($params[0],"=") !== false){
