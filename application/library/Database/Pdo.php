@@ -84,12 +84,12 @@ class Database_Pdo implements Database_IDatabase
         $this->statement = $this->pdo->prepare($sql);
 
         if (!empty($params)) {
-            $this->statement->execute($params);
+            $res = $this->statement->execute($params);
         } else {
-            $this->statement->execute();
+            $res = $this->statement->execute();
         }
 
-        return $this;
+        return $res;
     }
 
     public function update($sql, array $parmas = [])
@@ -98,12 +98,12 @@ class Database_Pdo implements Database_IDatabase
         $this->statement = $this->pdo->prepare($sql);
 
         if (!empty($params)) {
-            $this->statement->execute($params);
+            $res = $this->statement->execute($params);
         } else {
-            $this->statement->execute();
+            $res = $this->statement->execute();
         }
 
-        return $this;
+        return $res;
     }
 
     public function delete($sql)
