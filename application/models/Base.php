@@ -45,7 +45,7 @@ class BaseModel
         // TODO: Implement __call() method.
         foreach($this->_db->fields as $k => $item){
             if(!isset(static::$columns[$k])){
-                echo 'The '.$k.' not exists in table '.static::$table;
+                echo 'The column '.$k.' not exists in table '.static::$table;
                 return false;
             }
         }
