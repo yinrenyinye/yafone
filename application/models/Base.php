@@ -43,7 +43,7 @@ class BaseModel
     public function __call($name, $params)
     {
         // TODO: Implement __call() method.
-        var_dump($params);
+        var_dump($name,$params);
         return $this->_db->$name($params);
     }
 }
