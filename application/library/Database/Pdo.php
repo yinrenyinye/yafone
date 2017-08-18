@@ -162,7 +162,7 @@ class Database_Pdo implements Database_IDatabase
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($sql,",")." WHERE ".implode("=",$params[0]);
+            $sql .= rtrim($sql,",")." WHERE `".key($params[0])."`='".current($params[0])."'";
 
             var_dump($sql,$column_value);
 //            $this->update();
