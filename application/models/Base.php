@@ -36,4 +36,10 @@ class BaseModel
     {
         // TODO: Implement __get() method.
     }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement __call() method.
+        return $this->_db->$name($arguments);
+    }
 }

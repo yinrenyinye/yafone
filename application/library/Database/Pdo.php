@@ -17,72 +17,72 @@ class Database_Pdo implements Database_IDatabase
      */
     public $columns = [];
 
-    /** @var object the pdo object*/
+    /** @var object the pdo object */
     public $pdo;
 
-    /** @var object the pdo statement*/
+    /** @var object the pdo statement */
     public $statement;
 
     /** @var array database connect config */
     protected $_defultConf = [
-        'host' ,
-        'port' ,
-        'user' ,
-        'pwd' ,
+        'host',
+        'port',
+        'user',
+        'pwd',
         'db'
     ];
 
-    /** @var string error message*/
+    /** @var string error message */
     protected $_error;
 
-    public function connect(array $db_conf ,$president = true, $charset = 'UTF8', $timeout = 2)
+    public function connect(array $db_conf, $president = true, $charset = 'UTF8', $timeout = 2)
     {
         // TODO: Implement connect() method.
-        if(!$this->_checkConf($db_conf)) return $this->_error;
+        if (!$this->_checkConf($db_conf)) return $this->_error;
 
-        if(isset($db_conf['charset']) && !empty($db_conf['charset'])) $charset = $db_conf['charset'];
+        if (isset($db_conf['charset']) && !empty($db_conf['charset'])) $charset = $db_conf['charset'];
 
-        try{
+        try {
             $this->pdo = new \PDO(
                 "mysql:host={$db_conf['host']};port={$db_conf['port']};dbname={$db_conf['db']};charset={$charset};",
                 $db_conf['user'],
                 $db_conf['pwd'],
                 [
                     \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-                    \PDO::ATTR_PERSISTENT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $president,
-                    \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president']))? $db_conf['president'] : $timeout,
+                    \PDO::ATTR_PERSISTENT => (isset($db_conf['president']) && !empty($db_conf['president'])) ? $db_conf['president'] : $president,
+                    \PDO::ATTR_TIMEOUT => (isset($db_conf['president']) && !empty($db_conf['president'])) ? $db_conf['president'] : $timeout,
                     1002 => "SET NAMES {$charset}",
                 ]
             );
             return $this;
-        }catch (Exception $e){
-            return $e->getCode()." : ".$e->getMessage();
+        } catch (Exception $e) {
+            return $e->getCode() . " : " . $e->getMessage();
 
         }
     }
 
-    public function query($sql,array $params = [])
+    public function query($sql, array $params = [])
     {
         // TODO: Implement query() method.
         $this->statement = $this->pdo->prepare($sql);
 
-        if(!empty($params)){
+        if (!empty($params)) {
             $this->statement->execute($params);
-        }else{
+        } else {
             $this->statement->execute();
         }
 
         return $this;
     }
 
-    public function insert($sql,array $params = [])
+    public function insert($sql, array $params = [])
     {
         // TODO: Implement insert() method.
         $this->statement = $this->pdo->prepare($sql);
 
-        if(!empty($params)){
+        if (!empty($params)) {
             $this->statement->execute($params);
-        }else{
+        } else {
             $this->statement->execute();
         }
 
@@ -112,9 +112,9 @@ class Database_Pdo implements Database_IDatabase
     public function count($sql = '')
     {
         // TODO: Implement count() method.
-        if(empty($sql)){
+        if (empty($sql)) {
             return $this->query("SELECT count(*) AS `total` FROM `{$this->table}`")->getOne();
-        }else{
+        } else {
             return $this->query($sql)->getOne();
         }
     }
@@ -138,18 +138,12 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
-    public function __set($name, $value)
+    public function save($arguments)
     {
-        // TODO: Implement __set() method.
-        $this->$name = $value;
+
     }
 
-    public function __get($name)
-    {
-        // TODO: Implement __get() method.
-    }
-
-    public function save()
+    public function create()
     {
 
     }
@@ -157,8 +151,8 @@ class Database_Pdo implements Database_IDatabase
     private function _checkConf(array $conf)
     {
         foreach ($this->_defultConf as $item) {
-            if(!isset($conf[$item]) || empty($conf[$item])){
-                $this->_error = "config '".$item."' is must have!";
+            if (!isset($conf[$item]) || empty($conf[$item])) {
+                $this->_error = "config '" . $item . "' is must have!";
                 return false;
             }
         }
