@@ -175,7 +175,7 @@ class Database_Pdo implements Database_IDatabase
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($sql,",")." WHERE ".$params;
+            $sql .= rtrim($sql,",")." WHERE ".$params[0];
             var_dump($column_value,$sql);
         }
 
@@ -187,7 +187,7 @@ class Database_Pdo implements Database_IDatabase
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($sql,",")." WHERE `id`=".$params;
+            $sql .= rtrim($sql,",")." WHERE `id`=".$params[0];
             var_dump($column_value,$sql);
         }
     }
