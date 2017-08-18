@@ -217,12 +217,14 @@ class Database_Pdo implements Database_IDatabase
         $sql .= "INSERT INTO `".$this->table."` (";
         $i_sql = "";
         $v_sql = "";
+        $column_value = [];
         foreach ($this->fields as $k=>$v){
             $i_sql .= "`{$k}`,";
             $v_sql .= "?,";
+            $column_value[] = $v;
         }
         $sql .= rtrim($i_sql,",").") VALUES (".rtrim($v_sql,",").")";
-        var_dump($sql);
+        var_dump($sql,$column_value);
     }
 
     private function _checkConf(array $conf)
