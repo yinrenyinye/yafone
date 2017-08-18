@@ -166,7 +166,7 @@ class Database_Pdo implements Database_IDatabase
     {
         foreach ($this->_defultConf as $item) {
             if (!isset($conf[$item]) || empty($conf[$item])) {
-                $this->_error = "config '" . $item . "' is must have!";
+                $this->_error = "Config '" . $item . "' is must have!";
                 return false;
             }
         }

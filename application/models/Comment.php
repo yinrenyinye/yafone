@@ -10,6 +10,13 @@ class CommentModel extends BaseModel
 
     protected static $table = 'comment';
 
+    protected static $columns = [
+        'id' => 1,
+        'username' => 1,
+        'content' => 1,
+        'state' => 0
+    ];
+
     public function count()
     {
         return $this->_db->count();

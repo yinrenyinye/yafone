@@ -43,7 +43,11 @@ class BaseModel
     public function __call($name, $params)
     {
         // TODO: Implement __call() method.
-        var_dump($this->_db->fields);
+        foreach($this->_db->fields as $k => $item){
+            if(!isset(static::$columns[$k])){
+                return 'The '.$k.' is not exists in '.static::$table;
+            }
+        }
         return $this->_db->$name($params);
     }
 }
