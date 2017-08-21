@@ -36,6 +36,7 @@ class IndexController extends Yaf_Controller_Abstract
             echo "\n";
             echo "update success";
         }
+
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
