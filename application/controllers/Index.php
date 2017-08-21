@@ -16,21 +16,12 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function indexAction($name = "Stranger")
     {
-
-//        $comment = new CommentModel();
-//
-//        $comment->username = "miclezss";
-//        $comment->content = "this is a update simple orm test";
-//
-//        $comment->save(['id'=> 32,'username' => 'micle']);
-//
-//        $comment->destory(30);
-
         $curl = new Common_Curl();
         $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
         $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
         $curl->get("https://www.baidu.com");
         echo $curl->response;
+
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
