@@ -27,6 +27,8 @@ class IndexController extends Yaf_Controller_Abstract
 //        $comment->destory(30);
 
         $curl = new Common_Curl();
+        $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
+        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
         $curl->get("https://www.baidu.com");
         echo $curl->response;
         //1. fetch query
