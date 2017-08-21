@@ -68,7 +68,7 @@ class Common_Redis
             $this->_conConf['timeout'] = 10;
         }
 
-        $k = implode("_", array($this->_conConf['host'], $this->_conConf['port'], $this->_conConf['db'], $this->_conConf['db'], $this->_conConf['persistent']));
+        $k = implode("_", array($this->_conConf['host'], $this->_conConf['port'], $this->_conConf['db'], $this->_conConf['persistent']));
 
         if (!isset(self::$_redisHandle[$k]) || get_resource_type(self::$_redisHandle[$k]) !== 'redis') {
             $redis = new \Redis();
