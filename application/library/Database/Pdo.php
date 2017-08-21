@@ -67,62 +67,25 @@ class Database_Pdo implements Database_IDatabase
     public function query($sql, array $params = [])
     {
         // TODO: Implement query() method.
-        try{
-            $this->statement = $this->pdo->prepare($sql);
-
-            if (!empty($params)) {
-                $this->statement->execute($params);
-            } else {
-                $this->statement->execute();
-            }
-
-            return $this;
-        }catch (PDOException $e){
-            $this->transaction_status = false;
-            return $this->_error = array("errno" => $e->getCode(),"message" => $e->getMessage());
-        }
+        return $this->_execute($sql, $params);
     }
 
     public function insert($sql, array $params = [])
     {
         // TODO: Implement insert() method.
-        $this->statement = $this->pdo->prepare($sql);
-
-        if (!empty($params)) {
-            $res = $this->statement->execute($params);
-        } else {
-            $res = $this->statement->execute();
-        }
-
-        return $res;
+        return $this->_execute($sql, $params, 'insert');
     }
 
     public function update($sql, array $params = [])
     {
         // TODO: Implement update() method.
-        $this->statement = $this->pdo->prepare($sql);
-
-        if (!empty($params)) {
-            $res = $this->statement->execute($params);
-        } else {
-            $res = $this->statement->execute();
-        }
-
-        return $res;
+        return $this->_execute($sql, $params, 'update');
     }
 
-    public function delete($sql,array $params = [])
+    public function delete($sql, array $params = [])
     {
         // TODO: Implement delete() method.
-        $this->statement = $this->pdo->prepare($sql);
-
-        if (!empty($params)) {
-            $res = $this->statement->execute($params);
-        } else {
-            $res = $this->statement->execute();
-        }
-
-        return $res;
+        return $this->_execute($sql, $params, 'delete');
     }
 
     public function getOne()
@@ -195,63 +158,63 @@ class Database_Pdo implements Database_IDatabase
 
     public function save($params)
     {
-        if(is_array($params[0])){
+        if (is_array($params[0])) {
             $sql = "";
-            $sql .= "UPDATE `".$this->tableName."` SET";
+            $sql .= "UPDATE `" . $this->tableName . "` SET";
             $column_value = [];
             $set_sql = "";
-            foreach($this->fields as $ks => $vs){
-                $set_sql .= " `".$ks."`=? ,";
+            foreach ($this->fields as $ks => $vs) {
+                $set_sql .= " `" . $ks . "`=? ,";
                 $column_value[] = $vs;
             }
 
-            $sql .= rtrim($set_sql,",")." WHERE ";
+            $sql .= rtrim($set_sql, ",") . " WHERE ";
 
             $w_sql = "";
-            foreach($params[0] as $kw => $vw){
-                $w_sql .= " `".$kw."`=? AND";
+            foreach ($params[0] as $kw => $vw) {
+                $w_sql .= " `" . $kw . "`=? AND";
                 $column_value[] = $vw;
             }
-            $sql .= rtrim($w_sql,"AND");
+            $sql .= rtrim($w_sql, "AND");
 
-            if(!empty($sql) && !empty($w_sql) && !empty($column_value)){
-                $this->update($sql,$column_value);
+            if (!empty($sql) && !empty($w_sql) && !empty($column_value)) {
+                $this->update($sql, $column_value);
                 return true;
-            }else{
+            } else {
                 return $this->_error = "Invalid params!";
             }
         }
 
-        if(is_string($params[0]) && strpos($params[0],"=") !== false){
+        if (is_string($params[0]) && strpos($params[0], "=") !== false) {
             $sql = "";
-            $sql .= "UPDATE `".$this->tableName."` SET";
+            $sql .= "UPDATE `" . $this->tableName . "` SET";
             $column_value = [];
             $set_sql = "";
-            foreach($this->fields as $k => $v){
-                $set_sql .= " `".$k."`=? ,";
+            foreach ($this->fields as $k => $v) {
+                $set_sql .= " `" . $k . "`=? ,";
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($set_sql,",")." WHERE ".$params[0];
+            $sql .= rtrim($set_sql, ",") . " WHERE " . $params[0];
         }
 
-        if(is_numeric($params[0]) && intval($params[0]) > 0){
+        if (is_numeric($params[0]) && intval($params[0]) > 0) {
             $sql = "";
-            $sql .= "UPDATE `".$this->tableName."` SET";
+            $sql .= "UPDATE `" . $this->tableName . "` SET";
             $column_value = [];
             $set_sql = "";
-            foreach($this->fields as $k => $v){
-                $set_sql .= " `".$k."`=? ,";
+            foreach ($this->fields as $k => $v) {
+                $set_sql .= " `" . $k . "`=? ,";
                 $column_value[] = $v;
             }
 
-            $sql .= rtrim($set_sql,",")." WHERE `id`=".intval($params[0]);
+            $sql .= rtrim($set_sql, ",") . " WHERE `id`=" . intval($params[0]);
         }
 
-        if(!empty($sql) && !empty($column_value)){
-            $this->update($sql,$column_value);
+        if (!empty($sql) && !empty($column_value)) {
+            $this->update($sql, $column_value);
             return true;
-        }else{
+        } else {
             return $this->_error = "Invalid params!";
         }
     }
@@ -259,46 +222,76 @@ class Database_Pdo implements Database_IDatabase
     public function create()
     {
         $sql = "";
-        $sql .= "INSERT INTO `".$this->tableName."` (";
+        $sql .= "INSERT INTO `" . $this->tableName . "` (";
         $i_sql = "";
         $v_sql = "";
         $column_value = [];
 
-        foreach ($this->fields as $k=>$v){
+        foreach ($this->fields as $k => $v) {
             $i_sql .= "`{$k}`,";
             $v_sql .= "?,";
             $column_value[] = $v;
         }
 
-        $sql .= rtrim($i_sql,",").") VALUES (".rtrim($v_sql,",").")";
+        $sql .= rtrim($i_sql, ",") . ") VALUES (" . rtrim($v_sql, ",") . ")";
 
-        if(!empty($i_sql) && !empty($v_sql) && !empty($column_value)){
-            $this->insert($sql,$column_value);
+        if (!empty($i_sql) && !empty($v_sql) && !empty($column_value)) {
+            $this->insert($sql, $column_value);
             return true;
-        }else{
+        } else {
             return $this->_error = "Invalid params!";
         }
     }
 
     public function destory($params)
     {
-        if(is_array($params)){
-            if(is_numeric($params[0]) && intval($params[0]) > 0){
-                $sql = "DELETE FROM `".$this->tableName."` WHERE `id`=?";
+        if (is_array($params)) {
+            if (is_numeric($params[0]) && intval($params[0]) > 0) {
+                $sql = "DELETE FROM `" . $this->tableName . "` WHERE `id`=?";
                 $column_value = $params;
-                $this->delete($sql,$column_value);
-            }else{
+                $this->delete($sql, $column_value);
+            } else {
                 return $this->_error = "Invalid params!";
             }
         }
 
-        if(is_numeric($params) && intval($params) > 0){
+        if (is_numeric($params) && intval($params) > 0) {
             $sql = "";
             $column_value = [$params];
-            $this->delete($sql,$column_value);
+            $this->delete($sql, $column_value);
         }
 
         return $this->_error = "Invalid params!";
+    }
+
+    private function _execute($sql, $params = [], $operation = 'query')
+    {
+        try {
+            if ('query' === $operation) {
+                $this->statement = $this->pdo->prepare($sql);
+
+                if (!empty($params)) {
+                    $this->statement->execute($params);
+                } else {
+                    $this->statement->execute();
+                }
+
+                return $this;
+            } else {
+                $this->statement = $this->pdo->prepare($sql);
+
+                if (!empty($params)) {
+                    $res = $this->statement->execute($params);
+                } else {
+                    $res = $this->statement->execute();
+                }
+
+                return $res;
+            }
+        } catch (PDOException $e) {
+            $this->transaction_status = false;
+            return $this->_error = array("errno" => $e->getCode(), "message" => $e->getMessage());
+        }
     }
 
     private function _checkConf(array $conf)
