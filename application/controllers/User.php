@@ -35,16 +35,20 @@ class UserController extends Yaf_Controller_Abstract {
 
         $data = $user->get_list($pagesize,$offset);
 
-	    $pagination = new Common_Pagination();
+        if(1 < $pagetotal){
+            $pagination = new Common_Pagination();
 
-        $pagination->config([
-            'base_url' => 'http://yaf.brightdh.com/comment/index',
-            'pagetotal' => $pagetotal,
-            'cur_page' => $page
-        ]);
+            $pagination->config([
+                'base_url' => 'http://yaf.brightdh.com/user/index',
+                'pagetotal' => $pagetotal,
+                'cur_page' => $page
+            ]);
 
-        $page_link = $pagination->create_links('html');
-        var_dump($data,$page_link);
+            $page_link = $pagination->create_links('html');
+            var_dump($page_link);
+        }
+
+        var_dump($data);
         return false;
 	}
 }
