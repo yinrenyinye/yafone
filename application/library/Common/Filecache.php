@@ -7,7 +7,7 @@
  * Time: 16:18
  */
 
-class Database_Filecache
+class Common_Filecache
 {
 
     private $_root = '/dev/shm/www-temp/';
