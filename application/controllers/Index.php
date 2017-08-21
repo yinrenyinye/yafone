@@ -23,10 +23,9 @@ class IndexController extends Yaf_Controller_Abstract
 //        echo $curl->response;
         $redis = Common_Redis::connect();
 
-        $redis->setex("test",15,"test");
+        $redis->setex("test",5,"test");
         echo $redis->get("test");
         echo "\n";
-        sleep(1);
         echo $redis->ttl("test");
 
         $comment = new CommentModel();
