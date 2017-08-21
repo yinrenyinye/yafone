@@ -1,9 +1,8 @@
 <?php
 /**
- * @name IndexController
- * @author root
- * @desc 默认控制器
- * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
+ * @name CommentController
+ * @author micle
+ * @desc 评论控制器
  */
 class CommentController extends Yaf_Controller_Abstract {
 

@@ -1,9 +1,8 @@
 <?php
 /**
- * @name IndexController
- * @author root
- * @desc 默认控制器
- * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
+ * @name UserController
+ * @author micle
+ * @desc 用户控制器
  */
 class UserController extends Yaf_Controller_Abstract {
 
