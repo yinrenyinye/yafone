@@ -16,12 +16,18 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function indexAction($name = "Stranger")
     {
-        $curl = new Common_Curl();
-        $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
-        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
-        $curl->get("https://www.baidu.com");
-        echo $curl->response;
+//        $curl = new Common_Curl();
+//        $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
+//        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
+//        $curl->get("https://www.baidu.com");
+//        echo $curl->response;
 
+        $redis = Common_Redis::connect();
+
+        $redis->setex("test",15,"test");
+        echo $redis->get("test");
+        echo "\n";
+        echo $redis->ttl("test");
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
