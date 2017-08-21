@@ -67,15 +67,20 @@ class Database_Pdo implements Database_IDatabase
     public function query($sql, array $params = [])
     {
         // TODO: Implement query() method.
-        $this->statement = $this->pdo->prepare($sql);
+        try{
+            $this->statement = $this->pdo->prepare($sql);
 
-        if (!empty($params)) {
-            $this->statement->execute($params);
-        } else {
-            $this->statement->execute();
+            if (!empty($params)) {
+                $this->statement->execute($params);
+            } else {
+                $this->statement->execute();
+            }
+
+            return $this;
+        }catch (PDOException $e){
+            $this->transaction_status = false;
+            return $this->_error = array("errno" => $e->getCode(),"message" => $e->getMessage());
         }
-
-        return $this;
     }
 
     public function insert($sql, array $params = [])
@@ -144,6 +149,24 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement last_insert_id() method.
         return $this->pdo->lastInsertId();
+    }
+
+    public function begin_transaction()
+    {
+        $this->pdo->beginTransaction();
+        return true;
+    }
+
+    public function transaction_commit()
+    {
+        $this->pdo->commit();
+        return true;
+    }
+
+    public function transaction_rollback()
+    {
+        $this->pdo->rollback();
+        return true;
     }
 
     public function free_result()
