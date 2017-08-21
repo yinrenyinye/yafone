@@ -13,21 +13,21 @@ class BaseModel
 
     protected static $columns = [];
 
-    protected static $is_write = 1;
+    protected static $_mode = 1;
 
-    protected static $db_conf = [];
+    protected static $_db_conf = [];
 
     public function __construct()
     {
-        if(isset(static::$is_write)){
-            self::$is_write = static::$is_write;
+        if(isset(static::$_mode)){
+            self::$_mode = static::$_mode;
         }
 
-        if(isset(static::$db_conf)){
-            self::$db_conf = static::$db_conf;
+        if(isset(static::$_db_conf)){
+            self::$_db_conf = static::$_db_conf;
         }
 
-        $this->_db = Database_DB::getInstance(self::$is_write, self::$db_conf);
+        $this->_db = Database_DB::getInstance(self::$_mode, self::$_db_conf);
 
         $this->_db->tableName = static::$tableName;
 
