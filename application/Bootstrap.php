@@ -35,14 +35,14 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
         $router->addRoute('simple_route', $simpleRoute);
 
         $route = new Yaf_Route_Rewrite(
-            'comment/index',
+            'product/index',
             array(
-                'controller' => 'comment',
+                'controller' => 'product',
                 'action' => 'index'
             )
         );
         //使用路由器装载路由协议
-        $router->addRoute('comment/index', $route);
+        $router->addRoute('product/index', $route);
     }
 
     public function _initView(Yaf_Dispatcher $dispatcher)
