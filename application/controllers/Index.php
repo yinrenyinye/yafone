@@ -26,7 +26,7 @@ class IndexController extends Yaf_Controller_Abstract
         $redis->setex("test",15,"test");
         echo $redis->get("test");
         echo "\n";
-        sleep(5);
+        sleep(2);
         echo $redis->ttl("test");
 
         $comment = new CommentModel();
