@@ -28,6 +28,14 @@ class IndexController extends Yaf_Controller_Abstract
         echo "\n";
         sleep(5);
         echo $redis->ttl("test");
+
+        $comment = new CommentModel();
+        $comment->username = "miclefeng";
+        $comment->content = "this is a simple orm update test";
+        if($comment->save(['id'=>5])){
+            echo "\n";
+            echo "update success";
+        }
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
