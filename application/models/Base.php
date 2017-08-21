@@ -43,10 +43,12 @@ class BaseModel
     public function __call($name, $params)
     {
         // TODO: Implement __call() method.
-        foreach($this->_db->fields as $k => $item){
-            if(!isset(static::$columns[$k])){
-                echo 'The column '.$k.' not exists in table '.static::$tableName;
-                return false;
+        if(in_array($name,array('create','save'))){
+            foreach($this->_db->fields as $k => $item){
+                if(!isset(static::$columns[$k])){
+                    echo 'The column '.$k.' not exists in table '.static::$tableName;
+                    return false;
+                }
             }
         }
 
