@@ -19,6 +19,13 @@ class BaseModel
 
     public function __construct()
     {
+        if(isset(static::$is_write)){
+            self::$is_write = static::$is_write;
+        }
+
+        if(isset(static::$db_conf)){
+            self::$db_conf = static::$db_conf;
+        }
 
         $this->_db = Database_DB::getInstance(self::$is_write, self::$db_conf);
 
