@@ -26,6 +26,7 @@ class IndexController extends Yaf_Controller_Abstract
         $redis->setex("test",15,"test");
         echo $redis->get("test");
         echo "\n";
+        sleep(5);
         echo $redis->ttl("test");
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
