@@ -59,11 +59,13 @@ class CommentController extends Yaf_Controller_Abstract {
     public function publishAction()
     {
         $comment = new CommentModel();
+
         for($i = 1;$i <= 10000;$i++){
             $name = 'micle_'.$i;
             $content = 'This is a test '.$i;
             $comment->publish([$name,$content]);
         }
         echo "success";
+        return false;
     }
 }
