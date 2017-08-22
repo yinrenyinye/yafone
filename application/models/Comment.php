@@ -27,6 +27,11 @@ class CommentModel extends BaseModel
         return $this->_db->query("SELECT * FROM `".$this->table_name()."` LIMIT {$offset},{$pagesize}")->getAll();
     }
 
+    public function publish($data)
+    {
+        return $this->db->insert("INSERT INTO `comment` (`username`,`content`) VALUES (?,?)",$data);
+    }
+
     public function table_name()
     {
         return self::$tableName;
