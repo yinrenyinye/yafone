@@ -29,7 +29,7 @@ class CommentModel extends BaseModel
 
     public function publish($data)
     {
-        return $this->db->insert("INSERT INTO `comment` (`username`,`content`) VALUES (?,?)",$data);
+        return $this->_db->insert("INSERT INTO `comment` (`username`,`content`) VALUES (?,?)",$data);
     }
 
     public function table_name()
