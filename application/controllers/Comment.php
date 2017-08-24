@@ -22,11 +22,8 @@ class CommentController extends Yaf_Controller_Abstract {
 
 	    $comment = new CommentModel();
 
-	    var_dump('1');
-
 	    $total = $comment->count();
 
-        var_dump($total);
         $pagesize = 20;
 
         $pagetotal = ceil($total['total'] / $pagesize);
