@@ -18,13 +18,13 @@ class CommentController extends Yaf_Controller_Abstract {
         } else {
             $page = 1;
         }
-        if ($page <= 0) $page = 1;
+        if ($page < 1) $page = 1;
 
 	    $comment = new CommentModel();
 
 	    $total = $comment->count();
 
-        $pagesize = 5;
+        $pagesize = 20;
 
         $pagetotal = ceil($total['total'] / $pagesize);
 
@@ -35,12 +35,14 @@ class CommentController extends Yaf_Controller_Abstract {
         $data = $comment->get_list($pagesize,$offset);
 
         if(1 < $pagetotal){
+
             $pagination = new Common_Pagination();
 
             $pagination->config([
                 'base_url' => 'http://yaf.brightdh.com/comment/index',
                 'pagetotal' => $pagetotal,
-                'cur_page' => $page
+                'cur_page' => $page,
+                'show_link_nums' => 10
             ]);
 
             $page_link = $pagination->create_links('html');
