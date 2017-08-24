@@ -65,7 +65,7 @@ class Common_Redis
         }
 
         if (!isset($this->_conConf['timeout']) || empty($this->_conConf['timeout'])) {
-            $this->_conConf['timeout'] = 10;
+            $this->_conConf['timeout'] = self::$_defaultconf['timeout'];
         }
 
         $k = implode("_", array($this->_conConf['host'], $this->_conConf['port'], $this->_conConf['db'], $this->_conConf['persistent']));
