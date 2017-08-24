@@ -88,12 +88,12 @@ class Database_Pdo implements Database_IDatabase
         return $this->_execute($sql, $params, 'delete');
     }
 
-    public function getOne()
+    public function row_one()
     {
         return $this->statement->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getAll()
+    public function row_all()
     {
         return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -142,17 +142,6 @@ class Database_Pdo implements Database_IDatabase
     {
         // TODO: Implement close() method.
         $this->pdo->close();
-        return true;
-    }
-
-    public function getFields($name)
-    {
-        return $this->$name;
-    }
-
-    public function createFields($name, $value)
-    {
-        $this->fields[$name] = $value;
         return true;
     }
 
@@ -262,6 +251,17 @@ class Database_Pdo implements Database_IDatabase
         }
 
         return $this->_error = "Invalid params!";
+    }
+
+    public function getFields($name)
+    {
+        return $this->$name;
+    }
+
+    public function createFields($name, $value)
+    {
+        $this->fields[$name] = $value;
+        return true;
     }
 
     private function _execute($sql, $params = [], $operation = 'query')

@@ -24,7 +24,7 @@ class CommentModel extends BaseModel
 
     public function get_list($pagesize,$offset)
     {
-        return $this->_db->query("SELECT * FROM `".$this->table_name()."` LIMIT {$offset},{$pagesize}")->getAll();
+        return $this->_db->query("SELECT * FROM `".$this->table_name()."` LIMIT {$offset},{$pagesize}")->row_all();
     }
 
     public function publish($data)
