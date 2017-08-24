@@ -248,9 +248,11 @@ class Database_Pdo implements Database_IDatabase
             $sql = "";
             $column_value = [$params];
             $this->delete($sql, $column_value);
+        }else {
+            return $this->_error = "Invalid params!";
         }
 
-        return $this->_error = "Invalid params!";
+        return true;
     }
 
     public function getFields($name)
@@ -264,7 +266,7 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
-    private function _execute($sql, $params = [], $operation = 'query')
+    private function _execute($sql,array $params = [], $operation = 'query')
     {
         try {
             if ('query' === $operation) {
