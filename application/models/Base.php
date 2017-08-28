@@ -34,6 +34,12 @@ class BaseModel
         $this->_db->columns = static::$columns;
     }
 
+    /**
+     * 设置表中的字段的值
+     * @param $name
+     * @param $value
+     * @return bool
+     */
     public function __set($name, $value)
     {
         // TODO: Implement __set() method.
@@ -41,12 +47,23 @@ class BaseModel
         return true;
     }
 
+    /**
+     * 获取表中的字段得值
+     * @param $name
+     * @return mixed
+     */
     public function __get($name)
     {
         // TODO: Implement __get() method.
         return $this->_db->getFields($name);
     }
 
+    /**
+     * ORM的create,update,destory操作
+     * @param $name
+     * @param $params
+     * @return bool
+     */
     public function __call($name, $params)
     {
         // TODO: Implement __call() method.
