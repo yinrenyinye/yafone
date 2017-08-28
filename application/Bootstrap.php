@@ -10,25 +10,40 @@
  */
 class Bootstrap extends Yaf_Bootstrap_Abstract
 {
-
+    /**
+     * 注册基本配置
+     */
     public function _initConfig()
     {
-        //把配置保存起来
         $arrConfig = Yaf_Application::app()->getConfig();
         Yaf_Registry::set('default_app_config', $arrConfig['application']);
         Yaf_Registry::set('default_db_config', $arrConfig['database']);
     }
 
+    /**
+     * 自动加载扩展类
+     */
+    public function _initLoader()
+    {
+        \Yaf\Loader::import(APP_PATH . '/library/Vendor/autoload.php');
+    }
+
+    /**
+     * 注册插件
+     * @param Yaf_Dispatcher $dispatcher
+     */
     public function _initPlugin(Yaf_Dispatcher $dispatcher)
     {
-        //注册一个插件
         $objSamplePlugin = new SamplePlugin();
         $dispatcher->registerPlugin($objSamplePlugin);
     }
 
+    /**
+     * 注册路由规则
+     * @param Yaf_Dispatcher $dispatcher
+     */
     public function _initRoute(Yaf_Dispatcher $dispatcher)
     {
-        //在这里注册自己的路由协议,默认使用简单路由
         $router = $dispatcher::getInstance()->getRouter();
 
         $simpleRoute = new Yaf_Route_Simple('m', 'c', 'a');
@@ -45,8 +60,12 @@ class Bootstrap extends Yaf_Bootstrap_Abstract
         $router->addRoute('product/index', $route);
     }
 
+    /**
+     * 注册自定义视图
+     * @param Yaf_Dispatcher $dispatcher
+     */
     public function _initView(Yaf_Dispatcher $dispatcher)
     {
-        //在这里注册自己的view控制器，例如smarty,firekylin
+
     }
 }
