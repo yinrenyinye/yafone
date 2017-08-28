@@ -70,11 +70,14 @@ class CommentController extends Yaf_Controller_Abstract {
     public function xlsxAction()
     {
         $newFilePath = "../command/comment.xlsx";
+
         if(!file_exists($newFilePath)){
             touch($newFilePath);
         }
+
         $comment = new CommentModel();
         $data = $comment->get_list(1000);
+        var_dump(1111);
         $writer = WriterFactory::create(Type::XLSX);
         $writer->openToFile($newFilePath);
         $writer->addRows($data);
