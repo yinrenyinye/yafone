@@ -22,9 +22,9 @@ class CommentModel extends BaseModel
         return $this->_db->count();
     }
 
-    public function get_list($pagesize,$offset)
+    public function get_list($size,$offset = 0)
     {
-        return $this->_db->query("SELECT * FROM `".$this->table_name()."` LIMIT {$offset},{$pagesize}")->row_all();
+        return $this->_db->query("SELECT * FROM `".$this->table_name()."` LIMIT {$offset},{$size}")->row_all();
     }
 
     public function publish($data)

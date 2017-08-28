@@ -4,6 +4,9 @@
  * @author micle
  * @desc 评论控制器
  */
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Type;
+
 class CommentController extends Yaf_Controller_Abstract {
 
 	/** 
@@ -61,6 +64,18 @@ class CommentController extends Yaf_Controller_Abstract {
     public function publishAction()
     {
         echo "success";
+        return false;
+    }
+
+    public function xlsxAction()
+    {
+        $newFilePath = "../command/comment.xlsx";
+        $comment = new CommentModel();
+        $data = $comment->get_list(1000);
+        $writer = WriterFactory::create(Type::XLSX);
+        $writer->openToFile($newFilePath);
+        $writer->addRows($data);
+        $writer->close();
         return false;
     }
 }
