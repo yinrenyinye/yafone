@@ -38,6 +38,14 @@ class Database_Pdo implements Database_IDatabase
     /** @var string error message */
     protected $_error;
 
+    /**
+     * 数据库链接
+     * @param array $db_conf
+     * @param bool $president
+     * @param string $charset
+     * @param int $timeout
+     * @return $this|string
+     */
     public function connect(array $db_conf, $president = true, $charset = 'UTF8', $timeout = 2)
     {
         // TODO: Implement connect() method.
@@ -64,40 +72,77 @@ class Database_Pdo implements Database_IDatabase
         }
     }
 
+    /**
+     * 执行sql语句
+     * @param $sql
+     * @param array $params
+     * @return array
+     */
     public function query($sql, array $params = [])
     {
         // TODO: Implement query() method.
         return $this->_execute($sql, $params);
     }
 
+    /**
+     * 插入数据
+     * @param $sql
+     * @param array $params
+     * @return array
+     */
     public function insert($sql, array $params = [])
     {
         // TODO: Implement insert() method.
         return $this->_execute($sql, $params, 'insert');
     }
 
+    /**
+     * 修改数据
+     * @param $sql
+     * @param array $params
+     * @return array
+     */
     public function update($sql, array $params = [])
     {
         // TODO: Implement update() method.
         return $this->_execute($sql, $params, 'update');
     }
 
+    /**
+     * 删除数据
+     * @param $sql
+     * @param array $params
+     * @return array
+     */
     public function delete($sql, array $params = [])
     {
         // TODO: Implement delete() method.
         return $this->_execute($sql, $params, 'delete');
     }
 
+    /**
+     * 获取单条结果
+     * @return mixed
+     */
     public function row_one()
     {
         return $this->statement->fetch(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * 获取所有结果
+     * @return mixed
+     */
     public function row_all()
     {
         return $this->statement->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    /**
+     * 查询数据条数
+     * @param string $sql
+     * @return mixed
+     */
     public function count($sql = '')
     {
         // TODO: Implement count() method.
@@ -108,36 +153,60 @@ class Database_Pdo implements Database_IDatabase
         }
     }
 
+    /**
+     * 返回新增数据ID
+     * @return mixed
+     */
     public function last_insert_id()
     {
         // TODO: Implement last_insert_id() method.
         return $this->pdo->lastInsertId();
     }
 
+    /**
+     * 开启事务
+     * @return bool
+     */
     public function begin_transaction()
     {
         $this->pdo->beginTransaction();
         return true;
     }
 
+    /**
+     * 事务提交
+     * @return bool
+     */
     public function transaction_commit()
     {
         $this->pdo->commit();
         return true;
     }
 
+    /**
+     * 事务回滚
+     * @return bool
+     */
     public function transaction_rollback()
     {
         $this->pdo->rollback();
         return true;
     }
 
+    /**
+     * 释放结果集
+     * @return bool
+     */
     public function free_result()
     {
         $this->statement->free_result();
         return true;
     }
 
+    /**
+     * 关闭链接
+     * @return bool
+     */
     public function close()
     {
         // TODO: Implement close() method.
@@ -145,6 +214,11 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
+    /**
+     * 数据修改
+     * @param $params
+     * @return bool|string
+     */
     public function save($params)
     {
         if (is_array($params[0])) {
@@ -208,6 +282,10 @@ class Database_Pdo implements Database_IDatabase
         }
     }
 
+    /**
+     * 新增数据
+     * @return bool|string
+     */
     public function create()
     {
         $sql = "";
@@ -232,6 +310,11 @@ class Database_Pdo implements Database_IDatabase
         }
     }
 
+    /**
+     * 删除数据
+     * @param $params
+     * @return bool|string
+     */
     public function destory($params)
     {
         if (is_array($params)) {
@@ -255,17 +338,35 @@ class Database_Pdo implements Database_IDatabase
         return true;
     }
 
+    /**
+     * 获取表中的字段
+     * @param $name
+     * @return mixed
+     */
     public function getFields($name)
     {
         return $this->$name;
     }
 
+    /**
+     * 生成表中的字段
+     * @param $name
+     * @param $value
+     * @return bool
+     */
     public function createFields($name, $value)
     {
         $this->fields[$name] = $value;
         return true;
     }
 
+    /**
+     * 执行sql语句，返回结果
+     * @param $sql
+     * @param array $params
+     * @param string $operation
+     * @return $this|array
+     */
     private function _execute($sql, array $params = [], $operation = 'query')
     {
         try {
@@ -296,6 +397,11 @@ class Database_Pdo implements Database_IDatabase
         }
     }
 
+    /**
+     * 检查配置项
+     * @param array $conf
+     * @return bool
+     */
     private function _checkConf(array $conf)
     {
         foreach ($this->_defultConf as $item) {

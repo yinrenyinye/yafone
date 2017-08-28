@@ -24,21 +24,21 @@ interface Database_IDatabase
      * @param $sql
      * @return mixed
      */
-    public function query($sql,array $params = []);
+    public function query($sql, array $params = []);
 
     /**
      * 新增数据
      * @param $sql
      * @return mixed
      */
-    public function insert($sql,array $params = []);
+    public function insert($sql, array $params = []);
 
     /**
      * 修改数据
      * @param $sql
      * @return mixed
      */
-    public function update($sql,array $params = []);
+    public function update($sql, array $params = []);
 
     /**
      * 删除数据
@@ -46,7 +46,7 @@ interface Database_IDatabase
      * @param array $params
      * @return mixed
      */
-    public function delete($sql,array $params = []);
+    public function delete($sql, array $params = []);
 
     /**
      * 统计数量
