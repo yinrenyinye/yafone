@@ -183,7 +183,7 @@ EOD;
         $rowIndex = $this->lastWrittenRowIndex + 1;
         $numCells = count($dataRow);
 
-        $rowXML = '<row r="' . $rowIndex . '" spans="1:' . $numCells . '" height="13" customHeight="1">';
+        $rowXML = '<row r="' . $rowIndex . '" spans="1:' . $numCells . '" height="14" customHeight="1">';
 
         foreach ($dataRow as $cellValue) {
             $rowXML .= $this->getCellXML($rowIndex, $cellNumber, $cellValue, $style->getId());
@@ -219,7 +219,7 @@ EOD;
         } else if (CellHelper::isBoolean($cellValue)) {
             $cellXML .= ' t="b"><v>' . intval($cellValue) . '</v></c>';
         } else if (CellHelper::isNumeric($cellValue)) {
-            $cellXML .= '><v width="20" customWidth="1">' . $cellValue . '</v></c>';
+            $cellXML .= '><v>' . $cellValue . '</v></c>';
         } else if (empty($cellValue)) {
             if ($this->styleHelper->shouldApplyStyleOnEmptyCell($styleId)) {
                 $cellXML .= '/>';
