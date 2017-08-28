@@ -69,7 +69,7 @@ class CommentController extends Yaf_Controller_Abstract {
 
     public function xlsxAction()
     {
-        $newFilePath = "../command/comment.xlsx";
+        $newFilePath = "comment.xlsx";
 
         if(!file_exists($newFilePath)){
             touch($newFilePath);
