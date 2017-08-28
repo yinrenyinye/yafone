@@ -105,7 +105,7 @@ class Common_Pagination
                 }
 
                 if('array' === $type){
-                    $link_arr['loop_page'][] = $query_link . $i;
+                    $link_arr['loop_page'][$i] = $query_link . $i;
                 }
             }
 
@@ -125,7 +125,7 @@ class Common_Pagination
                     }
 
                     if('array' === $type){
-                        $link_arr['loop_page'][] = $query_link . $i;
+                        $link_arr['loop_page'][$i] = $query_link . $i;
                     }
                 }
 
@@ -143,7 +143,7 @@ class Common_Pagination
                         }
 
                         if('array' === $type){
-                            $link_arr['loop_page'][] = $query_link . $i;
+                            $link_arr['loop_page'][$i] = $query_link . $i;
                         }
                     }
 
@@ -158,7 +158,7 @@ class Common_Pagination
                         }
 
                         if('array' === $type){
-                            $link_arr['loop_page'][] = $query_link . $i;
+                            $link_arr['loop_page'][$i] = $query_link . $i;
                         }
                     }
                 }
