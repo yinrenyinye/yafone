@@ -21,6 +21,7 @@ class IndexController extends Yaf_Controller_Abstract
 //        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
 //        $curl->get("https://www.baidu.com");
 //        echo $curl->response;
+//        $curl->close();
         $redis = Common_Redis::connect();
 
         $redis->setex("test",5,"test");
