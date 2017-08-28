@@ -77,12 +77,10 @@ class CommentController extends Yaf_Controller_Abstract {
 
         $comment = new CommentModel();
         $data = $comment->get_list(1000);
-        var_dump(1111);
         $writer = WriterFactory::create(Type::XLSX);
+        $writer->openToFile($newFilePath);
         $writer->addNewSheetAndMakeItCurrent();
         var_dump($writer);
-
-        $writer->openToFile($newFilePath);
         $writer->addRows($data);
         $writer->close();
         return false;
