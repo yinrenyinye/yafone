@@ -20,6 +20,12 @@ class Database_DB
 
     }
 
+    /**
+     * 实例化数据库类
+     * @param int $_mode
+     * @param array $_db_conf
+     * @return mixed
+     */
     public static function getInstance($_mode = 1, array $_db_conf = [])
     {
         if (!(self::$_instance instanceof self)) {
@@ -28,6 +34,12 @@ class Database_DB
         return self::$_instance->connect($_mode, $_db_conf);
     }
 
+    /**
+     * 数据库链接
+     * @param $_mode
+     * @param $_db_conf
+     * @return mixed
+     */
     public static function connect($_mode, $_db_conf)
     {
         if (empty($_db_conf)) {
@@ -62,16 +74,36 @@ class Database_DB
         return self::_set_handler($alias, $db_link);
     }
 
+    /**
+     * 数据库类别名
+     * @param $driver
+     * @param $host
+     * @param $port
+     * @param $user
+     * @param $db
+     * @return string
+     */
     private function _make_alias($driver, $host, $port, $user, $db)
     {
         return implode(":", array($driver, $host, $port, $user, $db));
     }
 
+    /**
+     * 注册数据库类
+     * @param $alias
+     * @param $object
+     * @return mixed
+     */
     private function _set_handler($alias, $object)
     {
         return self::$_handler[$alias] = $object;
     }
 
+    /**
+     * 设置数据库驱动模式
+     * @param $driver
+     * @return bool
+     */
     private function _set_driver($driver)
     {
         self::$_driver = "Database_" . ucfirst($driver);

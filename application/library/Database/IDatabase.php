@@ -9,19 +9,68 @@
 interface Database_IDatabase
 {
 
+    /**
+     * 数据库链接
+     * @param array $db_conf
+     * @param $president
+     * @param $charset
+     * @param $timeout
+     * @return mixed
+     */
     public function connect(array $db_conf, $president, $charset, $timeout);
 
-    public function query($sql);
+    /**
+     * sql语句执行
+     * @param $sql
+     * @return mixed
+     */
+    public function query($sql,array $params = []);
 
-    public function insert($sql);
+    /**
+     * 新增数据
+     * @param $sql
+     * @return mixed
+     */
+    public function insert($sql,array $params = []);
 
-    public function update($sql);
+    /**
+     * 修改数据
+     * @param $sql
+     * @return mixed
+     */
+    public function update($sql,array $params = []);
 
-    public function delete($sql);
+    /**
+     * 删除数据
+     * @param $sql
+     * @param array $params
+     * @return mixed
+     */
+    public function delete($sql,array $params = []);
 
+    /**
+     * 统计数量
+     * @param $sql
+     * @return mixed
+     */
     public function count($sql);
 
+    /**
+     * 获取新增数据ID
+     * @return mixed
+     */
     public function last_insert_id();
 
+    /**
+     * 释放结果集
+     * @param $statement
+     * @return mixed
+     */
+    public function free_result($statement);
+
+    /**
+     * 关闭数据库链接
+     * @return mixed
+     */
     public function close();
 }
