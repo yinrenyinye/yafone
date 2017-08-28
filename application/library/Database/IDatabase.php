@@ -63,10 +63,9 @@ interface Database_IDatabase
 
     /**
      * 释放结果集
-     * @param $statement
      * @return mixed
      */
-    public function free_result($statement);
+    public function free_result();
 
     /**
      * 关闭数据库链接
