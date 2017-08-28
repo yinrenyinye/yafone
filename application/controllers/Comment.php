@@ -73,7 +73,7 @@ class CommentController extends Yaf_Controller_Abstract {
 
         $comment = new CommentModel();
         $data = $comment->get_list(1000);
-        array_unshift($data,array(['序号','用户名','留言内容','时间','状态']));
+        array_unshift($data,['序号','用户名','留言内容','时间','状态']);
         var_dump($data);
         $writer = WriterFactory::create(Type::XLSX);
         $writer->openToFile($newFilePath);
