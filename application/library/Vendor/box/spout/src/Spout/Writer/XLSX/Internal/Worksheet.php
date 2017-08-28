@@ -92,7 +92,7 @@ EOD;
         $this->throwIfSheetFilePointerIsNotAvailable();
 
         fwrite($this->sheetFilePointer, self::SHEET_XML_FILE_HEADER);
-        fwrite($this->sheetFilePointer, '<cols><col min="1" max="1" width="50" customWidth="1"/></cols>');
+        fwrite($this->sheetFilePointer, '<cols><col min="1" max="1" width="60" customWidth="1"/></cols>');
         fwrite($this->sheetFilePointer, '<sheetData>');
     }
 
@@ -219,7 +219,7 @@ EOD;
         } else if (CellHelper::isBoolean($cellValue)) {
             $cellXML .= ' t="b"><v>' . intval($cellValue) . '</v></c>';
         } else if (CellHelper::isNumeric($cellValue)) {
-            $cellXML .= '><v>' . $cellValue . '</v></c>';
+            $cellXML .= '><v width="20" customWidth="1">' . $cellValue . '</v></c>';
         } else if (empty($cellValue)) {
             if ($this->styleHelper->shouldApplyStyleOnEmptyCell($styleId)) {
                 $cellXML .= '/>';
