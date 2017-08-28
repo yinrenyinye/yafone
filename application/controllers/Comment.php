@@ -69,7 +69,7 @@ class CommentController extends Yaf_Controller_Abstract {
 
     public function xlsxAction()
     {
-        $newFilePath = APPLICATION_PATH."/../public/statics/download/comment.xlsx";
+        $newFilePath = APPLICATION_PATH."/public/statics/download/comment.xlsx";
 
         var_dump($newFilePath);
         $comment = new CommentModel();
