@@ -75,6 +75,7 @@ class BaseModel
                 }
             }
         }
+
         if(!isset($params) || empty($params)){
             return $this->_db->$name();
         }else{
