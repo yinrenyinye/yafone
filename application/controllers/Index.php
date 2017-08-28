@@ -28,16 +28,6 @@ class IndexController extends Yaf_Controller_Abstract
         echo "\n";
         echo $redis->ttl("test");
 
-//        $comment = new CommentModel();
-//        $comment->username = "create_orm";
-//        $comment->content = "this is a simple orm create test";
-//        if($comment->create()){
-//            echo "\n";
-//            echo "create success";
-//            $id = $comment->last_insert_id();
-//            echo "\n".$id;
-//        }
-
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
