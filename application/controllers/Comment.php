@@ -47,7 +47,7 @@ class CommentController extends Yaf_Controller_Abstract
                 'base_url' => 'http://yaf.brightdh.com/comment/index',
                 'pagetotal' => $pagetotal,
                 'cur_page' => $page,
-                'show_link_nums' => 10
+                'show_link_nums' => 11
             ]);
 
             $page_link = $pagination->create_links('array');
