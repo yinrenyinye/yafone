@@ -251,14 +251,14 @@ class Common_Curl
      *
      * The get request has no body data, the data will be correctly added to the $url with the http_build_query() method.
      *
-     * @param string $url  The url to make the get request for
-     * @param array  $data Optional arguments who are part of the url
+     * @param string $url The url to make the get request for
+     * @param array $data Optional arguments who are part of the url
      * @return self
      */
     public function get($url, $data = array())
     {
         if (count($data) > 0) {
-            $this->setOpt(CURLOPT_URL, $url.'?'.http_build_query($data));
+            $this->setOpt(CURLOPT_URL, $url . '?' . http_build_query($data));
         } else {
             $this->setOpt(CURLOPT_URL, $url);
         }
@@ -270,8 +270,8 @@ class Common_Curl
     /**
      * Make a post request with optional post data.
      *
-     * @param string $url  The url to make the get request
-     * @param array  $data Post data to pass to the url
+     * @param string $url The url to make the get request
+     * @param array $data Post data to pass to the url
      * @return self
      */
     public function post($url, $data = array())
@@ -287,16 +287,16 @@ class Common_Curl
      *
      * The put request data can be either sent via payload or as get paramters of the string.
      *
-     * @param string $url     The url to make the get request
-     * @param array  $data    Optional data to pass to the $url
-     * @param bool   $payload Whether the data should be transmitted trough payload or as get parameters of the string
+     * @param string $url The url to make the get request
+     * @param array $data Optional data to pass to the $url
+     * @param bool $payload Whether the data should be transmitted trough payload or as get parameters of the string
      * @return self
      */
     public function put($url, $data = array(), $payload = false)
     {
-        if (! empty($data)) {
+        if (!empty($data)) {
             if ($payload === false) {
-                $url .= '?'.http_build_query($data);
+                $url .= '?' . http_build_query($data);
             } else {
                 $this->preparePayload($data);
             }
@@ -313,16 +313,16 @@ class Common_Curl
      *
      * The patch request data can be either sent via payload or as get paramters of the string.
      *
-     * @param string $url     The url to make the get request
-     * @param array  $data    Optional data to pass to the $url
-     * @param bool   $payload Whether the data should be transmitted trough payload or as get parameters of the string
+     * @param string $url The url to make the get request
+     * @param array $data Optional data to pass to the $url
+     * @param bool $payload Whether the data should be transmitted trough payload or as get parameters of the string
      * @return self
      */
     public function patch($url, $data = array(), $payload = false)
     {
-        if (! empty($data)) {
+        if (!empty($data)) {
             if ($payload === false) {
-                $url .= '?'.http_build_query($data);
+                $url .= '?' . http_build_query($data);
             } else {
                 $this->preparePayload($data);
             }
@@ -337,16 +337,16 @@ class Common_Curl
     /**
      * Make a delete request with optional data.
      *
-     * @param string $url     The url to make the delete request
-     * @param array  $data    Optional data to pass to the $url
-     * @param bool   $payload Whether the data should be transmitted trough payload or as get parameters of the string
+     * @param string $url The url to make the delete request
+     * @param array $data Optional data to pass to the $url
+     * @param bool $payload Whether the data should be transmitted trough payload or as get parameters of the string
      * @return self
      */
     public function delete($url, $data = array(), $payload = false)
     {
-        if (! empty($data)) {
+        if (!empty($data)) {
             if ($payload === false) {
-                $url .= '?'.http_build_query($data);
+                $url .= '?' . http_build_query($data);
             } else {
                 $this->preparePayload($data);
             }
@@ -378,7 +378,7 @@ class Common_Curl
     public function setBasicAuthentication($username, $password)
     {
         $this->setHttpAuth(self::AUTH_BASIC);
-        $this->setOpt(CURLOPT_USERPWD, $username.':'.$password);
+        $this->setOpt(CURLOPT_USERPWD, $username . ':' . $password);
         return $this;
     }
 
@@ -393,13 +393,13 @@ class Common_Curl
      * $curl->get('http://example.com/request.php');
      * ```
      *
-     * @param string $key   The header key
+     * @param string $key The header key
      * @param string $value The value for the given header key
      * @return self
      */
     public function setHeader($key, $value)
     {
-        $this->_headers[$key] = $key.': '.$value;
+        $this->_headers[$key] = $key . ': ' . $value;
         $this->setOpt(CURLOPT_HTTPHEADER, array_values($this->_headers));
         return $this;
     }
@@ -450,7 +450,7 @@ class Common_Curl
     /**
      * Set contents of HTTP Cookie header.
      *
-     * @param string $key   The name of the cookie
+     * @param string $key The name of the cookie
      * @param string $value The value for the provided cookie name
      * @return self
      */
@@ -468,30 +468,30 @@ class Common_Curl
      *
      * @see http://php.net/curl_setopt
      *
-     * @param int   $option The curl option constante e.g. `CURLOPT_AUTOREFERER`, `CURLOPT_COOKIESESSION`
-     * @param mixed $value  The value to pass for the given $option
+     * @param int $option The curl option constante e.g. `CURLOPT_AUTOREFERER`, `CURLOPT_COOKIESESSION`
+     * @param mixed $value The value to pass for the given $option
      */
     public function setOpt($option, $value)
     {
         return curl_setopt($this->curl, $option, $value);
     }
-    
-     /**
+
+    /**
      * Get customized curl options.
      *
      * To see a full list of options: http://php.net/curl_getinfo
      *
      * @see http://php.net/curl_getinfo
      *
-     * @param int   $option The curl option constante e.g. `CURLOPT_AUTOREFERER`, `CURLOPT_COOKIESESSION`
-     * @param mixed $value  The value to check for the given $option
+     * @param int $option The curl option constante e.g. `CURLOPT_AUTOREFERER`, `CURLOPT_COOKIESESSION`
+     * @param mixed $value The value to check for the given $option
      */
     public function getOpt($option)
     {
         return curl_getinfo($this->curl, $option);
     }
-    
-     /**
+
+    /**
      * Return the endpoint set for curl
      *
      * @see http://php.net/curl_getinfo

@@ -11,7 +11,7 @@ class Database_Mysqli implements Database_IDatabase
 
     public $table;
 
-    public function connect(array $db_conf,$president,$charset,$timeout)
+    public function connect(array $db_conf, $president, $charset, $timeout)
     {
         // TODO: Implement connect() method.
     }

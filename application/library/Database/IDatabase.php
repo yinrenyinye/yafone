@@ -9,7 +9,7 @@
 interface Database_IDatabase
 {
 
-    public function connect(array $db_conf,$president,$charset,$timeout);
+    public function connect(array $db_conf, $president, $charset, $timeout);
 
     public function query($sql);
 

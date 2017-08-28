@@ -6,7 +6,6 @@
  * Date: 2017/8/15
  * Time: 16:18
  */
-
 class Common_Filecache
 {
 
@@ -21,13 +20,11 @@ class Common_Filecache
      */
     public function __construct($group = null, $time = null)
     {
-        if (!is_null($group))
-        {
+        if (!is_null($group)) {
             $this->_root .= "{$group}/";
         }
 
-        if (!$this->_time)
-        {
+        if (!$this->_time) {
             $this->_time = is_null($time) ? time() : $time;
         }
     }
@@ -43,16 +40,14 @@ class Common_Filecache
     public function get($k, $expire = NULL)
     {
         // 文件未创建
-        if (!is_file($_file = $this->_f($k)))
-        {
+        if (!is_file($_file = $this->_f($k))) {
             return false;
         }
 
         // 过期检测
-        if (is_numeric($expire))
-        {
+        if (is_numeric($expire)) {
             $_expire = ($this->_time - filemtime($_file)) > $expire;
-            if($_expire)
+            if ($_expire)
                 return false;
         }
 
@@ -77,7 +72,7 @@ class Common_Filecache
     public function del($k)
     {
         $_file = $this->_f($k);
-        if(is_file($_file) && unlink($_file)){
+        if (is_file($_file) && unlink($_file)) {
             return true;
         }
         return false;
@@ -91,8 +86,7 @@ class Common_Filecache
     private function _read($_file)
     {
         $_fh = fopen($_file, "r");
-        if ($_fh && flock($_fh, LOCK_SH))
-        {
+        if ($_fh && flock($_fh, LOCK_SH)) {
             $data = fread($_fh, filesize($_file));
             flock($_fh, LOCK_UN);
             fclose($_fh);
@@ -112,14 +106,12 @@ class Common_Filecache
      */
     private function _write($_file, $data, $mode = 'w+')
     {
-        if (!is_dir($_dir = dirname($_file)))
-        {
+        if (!is_dir($_dir = dirname($_file))) {
             mkdir($_dir, 0755, true);
         }
 
         $_fh = fopen($_file, $mode);
-        if ($_fh && flock($_fh, LOCK_EX))
-        {
+        if ($_fh && flock($_fh, LOCK_EX)) {
             fwrite($_fh, $data);
             flock($_fh, LOCK_UN);
             fclose($_fh);
