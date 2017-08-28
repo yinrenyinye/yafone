@@ -27,6 +27,11 @@ class Common_Redis
         }
     }
 
+    /**
+     * 获取redis链接
+     * @return mixed
+     * @throws Exception
+     */
     public static function connect()
     {
         // instance
@@ -46,6 +51,10 @@ class Common_Redis
         return self::$_instance->_link();
     }
 
+    /**
+     * 创建redis链接
+     * @return mixed
+     */
     private function _link()
     {
         if (!isset($this->_conConf['host']) || empty($this->_conConf['host'])) {

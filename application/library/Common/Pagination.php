@@ -34,6 +34,9 @@ class Common_Pagination
 
     }
 
+    /**
+     * 初始化配置
+     */
     public function config()
     {
         if(func_num_args() > 1){
