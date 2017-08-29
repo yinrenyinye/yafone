@@ -62,7 +62,7 @@ class UserController extends Yaf_Controller_Abstract
         $mail = new PHPMailer(true);
         try {
             //Server settings
-            $mail->SMTPDebug = 1;                                 // Enable verbose debug output
+            $mail->SMTPDebug = 2;                                 // Enable verbose debug output
             $mail->isSMTP();                                      // Set mailer to use SMTP
             $mail->Host = 'smtp.163.com;';                        // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
