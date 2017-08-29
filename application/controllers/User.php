@@ -67,7 +67,7 @@ class UserController extends Yaf_Controller_Abstract
             $mail->Host = 'smtp.163.com;';                        // Specify main and backup SMTP servers
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'miclefengzss@163.com';             // SMTP username
-            $mail->Password = 'PS!s5tlshitsaym';                  // SMTP password
+            $mail->Password = 'Zss5494946';                  // SMTP password
             $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 465;                                    // TCP port to connect to
             $mail->SMTPOptions = array (
