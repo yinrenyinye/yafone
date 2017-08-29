@@ -87,5 +87,6 @@ class UserController extends Yaf_Controller_Abstract
             echo 'Message could not be sent.';
             echo 'Mailer Error: ' . $mail->ErrorInfo;
         }
+        return false;
     }
 }
