@@ -1,5 +1,5 @@
 gitpull.sh
 public/webhooks.php
-download/*
-download/
+public/statics/download/*
 application/library/vendor/*.php
+application/library/vendor/*
