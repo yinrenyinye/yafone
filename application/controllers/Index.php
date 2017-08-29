@@ -28,7 +28,8 @@ class IndexController extends Yaf_Controller_Abstract
         echo $redis->get("test");
         echo "\n";
         echo $redis->ttl("test");
-        echo "\n".STATICS_PATH;
+        echo "\n";
+        var_dump(STATICS_PATH);
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
