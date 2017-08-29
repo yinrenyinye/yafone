@@ -1,0 +1,6 @@
+{
+    "require": {
+        "box/spout": "^2.7",
+        "phpmailer/phpmailer": "^6.0"
+    }
+}
