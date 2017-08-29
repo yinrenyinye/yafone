@@ -68,8 +68,15 @@ class UserController extends Yaf_Controller_Abstract
             $mail->SMTPAuth = true;                               // Enable SMTP authentication
             $mail->Username = 'miclefengzss@163.com';             // SMTP username
             $mail->Password = 'PS!s5tlshitsaym';                  // SMTP password
-            $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 465;                                    // TCP port to connect to
+            $mail->SMTPOptions = array (
+                'ssl' => array (
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
 
             //Recipients
             $mail->setFrom('miclefengzss@163.com', 'Micle');
