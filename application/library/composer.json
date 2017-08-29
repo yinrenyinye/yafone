@@ -2,7 +2,6 @@
     "require": {
         "box/spout": "^2.7",
         "phpmailer/phpmailer": "^6.0",
-        "respect/validation": "^1.1",
-        "wixel/gump": "^1.5"
+        "respect/validation": "^1.1"
     }
 }
