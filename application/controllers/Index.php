@@ -18,16 +18,16 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function indexAction($name = "Stranger")
     {
-        $curl = new Curl();
-        $curl->get('https://www.baidu.com/');
-
-        if ($curl->error) {
-            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
-        } else {
-            echo 'Response:' . "\n";
-            var_dump($curl->response);
-        }
-        $curl->close();
+//        $curl = new Curl();
+//        $curl->get('https://www.baidu.com/');
+//
+//        if ($curl->error) {
+//            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
+//        } else {
+//            echo 'Response:' . "\n";
+//            var_dump($curl->response);
+//        }
+//        $curl->close();
 
 //        $redis = Common_Redis::connect();
 //
@@ -44,10 +44,9 @@ class IndexController extends Yaf_Controller_Abstract
 //		$model = new SampleModel();
 
         //3. assign
-//		$this->getView()->assign("content", $model->selectSample());
-//		$this->getView()->assign("name", $name);
+		$this->getView()->assign("staticPath", STATICS_PATH."/backend/");
 
         //4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
-        return false;
+        return true;
     }
 }
