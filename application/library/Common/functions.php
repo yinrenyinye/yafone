@@ -319,10 +319,11 @@ function curl_multi($data, $options = array())
     while ($active and $mrc == CURLM_OK) {
         if (curl_multi_select($mh) === -1) {
             usleep(100);
+        } else {
+            do {
+                $mrc = curl_multi_exec($mh, $active);
+            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
         }
-        do {
-            $mrc = curl_multi_exec($mh, $active);
-        } while ($mrc == CURLM_CALL_MULTI_PERFORM);
     }
     //====================================================================
     //获取批处理内容
