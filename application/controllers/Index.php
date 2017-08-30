@@ -6,6 +6,8 @@
  * @desc 默认控制器
  * @see http://www.php.net/manual/en/class.yaf-controller-abstract.php
  */
+use \Curl\Curl;
+
 class IndexController extends Yaf_Controller_Abstract
 {
 
@@ -16,20 +18,24 @@ class IndexController extends Yaf_Controller_Abstract
      */
     public function indexAction($name = "Stranger")
     {
-//        $curl = new Common_Curl();
-//        $curl->setOpt(CURLOPT_RETURNTRANSFER, TRUE);
-//        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, FALSE);
-//        $curl->get("https://www.baidu.com");
-//        echo $curl->response;
-//        $curl->close();
-        $redis = Common_Redis::connect();
+        $curl = new Curl();
+        $curl->get('https://www.example.com/');
 
-        $redis->setex("test",5,"test");
-        echo $redis->get("test");
-        echo "\n";
-        echo $redis->ttl("test");
-        echo "\n";
-        var_dump(STATICS_PATH);
+        if ($curl->error) {
+            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
+        } else {
+            echo 'Response:' . "\n";
+            var_dump($curl->response);
+        }
+        $curl->close();
+//        $redis = Common_Redis::connect();
+//
+//        $redis->setex("test",5,"test");
+//        echo $redis->get("test");
+//        echo "\n";
+//        echo $redis->ttl("test");
+//        echo "\n";
+//        var_dump(STATICS_PATH);
         //1. fetch query
 //		$get = $this->getRequest()->getQuery("get", "default value");
 
