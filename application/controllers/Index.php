@@ -19,7 +19,7 @@ class IndexController extends Yaf_Controller_Abstract
     public function indexAction($name = "Stranger")
     {
         $curl = new Curl();
-        $curl->get('https://www.example.com/');
+        $curl->get('https://www.baidu.com/');
 
         if ($curl->error) {
             echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
