@@ -44,7 +44,7 @@ class IndexController extends Yaf_Controller_Abstract
 //		$model = new SampleModel();
 
         //3. assign
-		$this->getView()->assign("staticPath", STATICS_PATH."/backend/");
+		$this->getView()->assign("staticPath", B_STATIC_PATH);
 
         //4. render by Yaf, 如果这里返回FALSE, Yaf将不会调用自动视图引擎Render模板
         return true;
