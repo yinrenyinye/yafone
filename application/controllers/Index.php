@@ -28,6 +28,7 @@ class IndexController extends Yaf_Controller_Abstract
             var_dump($curl->response);
         }
         $curl->close();
+
 //        $redis = Common_Redis::connect();
 //
 //        $redis->setex("test",5,"test");
