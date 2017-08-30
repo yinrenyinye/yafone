@@ -3,3 +3,6 @@ public/webhooks.php
 public/statics/download/*
 application/library/vendor/*.php
 application/library/vendor/*
+.idea/workspace.xml
+.idea/workspace.xml
+.idea/workspace.xml
