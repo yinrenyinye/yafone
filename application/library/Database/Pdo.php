@@ -274,6 +274,8 @@ class Database_Pdo implements Database_IDatabase
             $sql .= rtrim($set_sql, ",") . " WHERE `id`=" . intval($params[0]);
         }
 
+        $this->fields = [];
+
         if (!empty($sql) && !empty($column_value)) {
             $this->update($sql, $column_value);
             return true;
@@ -301,6 +303,8 @@ class Database_Pdo implements Database_IDatabase
         }
 
         $sql .= rtrim($i_sql, ",") . ") VALUES (" . rtrim($v_sql, ",") . ")";
+
+        $this->fields = [];
 
         if (!empty($i_sql) && !empty($v_sql) && !empty($column_value)) {
             $this->insert($sql, $column_value);

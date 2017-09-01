@@ -5,3 +5,4 @@ application/library/vendor/*.php
 application/library/vendor/*
 .idea/workspace.xml
 public/statics/backend/*
+.idea/workspace.xml
