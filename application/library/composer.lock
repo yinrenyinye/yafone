@@ -8,20 +8,19 @@
     "packages": [
         {
             "name": "box/spout",
-            "version": "v2.7.2",
+            "version": "v2.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/box/spout.git",
-                "reference": "4a65466b6135d2aa28dd3bc52785a5e999f95fe8"
+                "reference": "3681a3421a868ab9a65da156c554f756541f452b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/box/spout/zipball/4a65466b6135d2aa28dd3bc52785a5e999f95fe8",
-                "reference": "4a65466b6135d2aa28dd3bc52785a5e999f95fe8",
+                "url": "https://api.github.com/repos/box/spout/zipball/3681a3421a868ab9a65da156c554f756541f452b",
+                "reference": "3681a3421a868ab9a65da156c554f756541f452b",
                 "shasum": ""
             },
             "require": {
-                "ext-simplexml": "*",
                 "ext-xmlreader": "*",
                 "ext-zip": "*",
                 "php": ">=5.4.0"
@@ -73,7 +72,7 @@
                 "write",
                 "xlsx"
             ],
-            "time": "2017-03-28T13:07:48+00:00"
+            "time": "2017-09-25T19:44:35+00:00"
         },
         {
             "name": "php-curl-class/php-curl-class",
@@ -81,12 +80,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-curl-class/php-curl-class.git",
-                "reference": "20d718e97e705568fa0407773818b6e3ae3e1a36"
+                "reference": "dd8493d6b68459fce292be567bb82cfc98ed3277"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/20d718e97e705568fa0407773818b6e3ae3e1a36",
-                "reference": "20d718e97e705568fa0407773818b6e3ae3e1a36",
+                "url": "https://api.github.com/repos/php-curl-class/php-curl-class/zipball/dd8493d6b68459fce292be567bb82cfc98ed3277",
+                "reference": "dd8493d6b68459fce292be567bb82cfc98ed3277",
                 "shasum": ""
             },
             "require": {
@@ -130,20 +129,20 @@
                 "web service",
                 "xml"
             ],
-            "time": "2017-08-25T07:36:03+00:00"
+            "time": "2017-09-14T06:53:22+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.0.0",
+            "version": "v6.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "ea25dc122d22966b7dd4ca1083c63afeeb50dfcd"
+                "reference": "992392437c2e2784e0dc41446024fe411d293c96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/ea25dc122d22966b7dd4ca1083c63afeeb50dfcd",
-                "reference": "ea25dc122d22966b7dd4ca1083c63afeeb50dfcd",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/992392437c2e2784e0dc41446024fe411d293c96",
+                "reference": "992392437c2e2784e0dc41446024fe411d293c96",
                 "shasum": ""
             },
             "require": {
@@ -152,8 +151,9 @@
             },
             "require-dev": {
                 "doctrine/annotations": "1.2.*",
+                "friendsofphp/php-cs-fixer": "^2.2",
                 "phpdocumentor/phpdocumentor": "2.*",
-                "phpunit/phpunit": "4.*",
+                "phpunit/phpunit": "^4.8 || ^5.7",
                 "zendframework/zend-eventmanager": "3.0.*",
                 "zendframework/zend-i18n": "2.7.3",
                 "zendframework/zend-serializer": "2.7.*"
@@ -194,7 +194,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2017-08-28T11:42:41+00:00"
+            "time": "2017-09-14T16:47:12+00:00"
         },
         {
             "name": "respect/validation",
