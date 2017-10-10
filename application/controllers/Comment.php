@@ -33,7 +33,9 @@ class CommentController extends Yaf_Controller_Abstract
 
         $pagetotal = ceil($total['total'] / $pagesize);
 
-        if ($page > $pagetotal) $page = $pagetotal;
+        if($pagetotal > 1){
+            if ($page > $pagetotal) $page = $pagetotal;
+        }
 
         $offset = ($page - 1) * $pagesize;
 
