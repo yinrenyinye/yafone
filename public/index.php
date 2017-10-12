@@ -11,7 +11,7 @@ $application->bootstrap()->run();
 
 // 结束收集
 $xhprof_data = xhprof_disable();
-$XHPROF_ROOT = "../xhprof";
+$XHPROF_ROOT = realpath(dirname(__FILE__) .'/../../xhprof');
 include_once $XHPROF_ROOT . "/xhprof_lib/utils/xhprof_lib.php";
 include_once $XHPROF_ROOT . "/xhprof_lib/utils/xhprof_runs.php";
 $xhprof_runs = new XHProfRuns_Default();
