@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 // 启动xhprof性能数据收集
 xhprof_enable(XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY);
 
